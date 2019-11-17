@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "uzuto",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authuzuto95557ea8",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

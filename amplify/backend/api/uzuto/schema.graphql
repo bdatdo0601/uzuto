@@ -1,0 +1,8 @@
+type Guest @model {
+    id: ID!
+    name: String!
+    description: String
+    isRsvp: Boolean
+    rsvpTimeStamp: AWSDate
+    response: [String]
+}
