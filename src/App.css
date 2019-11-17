@@ -1,0 +1,4 @@
+@font-face {
+    font-family: "CursiveFont";
+    src: local("CursiveFont"), url(./assets/Precious.ttf) format("truetype");
+}
