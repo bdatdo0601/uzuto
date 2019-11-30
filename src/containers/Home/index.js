@@ -37,7 +37,7 @@ const CountdownDisplay = ({ value, measurement }) => {
 };
 
 const Home = () => {
-    const WEDDING_DATE = moment("20200517");
+    const WEDDING_DATE = moment("20200516");
     const { width } = useWindowSize();
     console.log(width);
     const imgPath = width > 768 ? LF2 : LF1;
