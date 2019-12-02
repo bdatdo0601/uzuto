@@ -1,108 +1,63 @@
-import React from "react";
-import Countdown from "react-countdown-now";
-import moment from "moment";
-import LF1 from "../../assets/LF1.jpg";
-import LF2 from "../../assets/LF2.jpg";
-
-import { useWindowSize } from "../../utils/hooks";
-
-const CountdownDisplay = ({ value, measurement }) => {
-    return (
-        <div
-            className="flex-col content-center items-center"
-            style={{ backgroundColor: "rgba(0,0,0,0.5)", margin: 8, padding: 8 }}
-        >
-            <h3
-                className="self-center text-4xl"
-                style={{
-                    fontFamily: "CursiveFont",
-                    color: "white",
-                    textShadow: "4px 4px #000",
-                }}
-            >
-                {value}
-            </h3>
-            <h6
-                className="self-center text-2xl"
-                style={{
-                    fontFamily: "CursiveFont",
-                    color: "white",
-                    textShadow: "4px 4px #000",
-                }}
-            >
-                {measurement}
-            </h6>
-        </div>
-    );
-};
+import React, { useContext } from "react";
+import LF1 from "../../assets/LF1.png";
+import HomeSection from "../../components/HomeSection";
+import LinhButton from "../../components/LinhButton";
+import CountdownDisplay from "../../components/CountdownDisplay";
+import WeddingInfoContext from "../../context/weddingInfoContext";
 
 const Home = () => {
-    const WEDDING_DATE = moment("20200516");
-    const { width } = useWindowSize();
-    console.log(width);
-    const imgPath = width > 768 ? LF2 : LF1;
+    const { USA } = useContext(WeddingInfoContext);
     return (
-        <>
-            <div
-                className="h-screen v-screen align-middle flex text-center items-center content-center self-center"
-                style={{
-                    backgroundImage: `url(${imgPath})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                }}
-            >
-                <span className="w-full">
-                    <h1
-                        className="self-center text-6xl"
-                        style={{ fontFamily: "CursiveFont", color: "white", textShadow: "4px 4px #000" }}
-                    >
-                        Linh Do & Andrew Fritz
-                    </h1>
-                    <h4
-                        className="self-center text-4xl"
-                        style={{ fontFamily: "CursiveFont", color: "white", textShadow: "4px 4px #000" }}
-                    >
-                        Save the date - {WEDDING_DATE.format("MMMM Do YYYY")}
-                    </h4>
-                    <Countdown
-                        date={WEDDING_DATE.toString()}
-                        renderer={({ days, hours, minutes, seconds, completed }) => {
-                            if (completed) {
-                                // Render a completed state
-                                return (
-                                    <h4
-                                        className="self-center text-4xl"
-                                        style={{
-                                            fontFamily: "CursiveFont",
-                                            color: "white",
-                                            textShadow: "4px 4px #000",
-                                        }}
-                                    >
-                                        Today is the day
-                                    </h4>
-                                );
-                            } else {
-                                // Render a countdown
-                                return (
-                                    <>
-                                        <div
-                                            className="flex flex-row w-full content-center items-center flex-wrap"
-                                            style={{ justifyContent: "center" }}
-                                        >
-                                            <CountdownDisplay value={days} measurement="Day(s)" />
-                                            <CountdownDisplay value={hours} measurement="Hour(s)" />
-                                            <CountdownDisplay value={minutes} measurement="Minute(s)" />
-                                            <CountdownDisplay value={seconds} measurement="Second(s)" />
-                                        </div>
-                                    </>
-                                );
-                            }
-                        }}
-                    />
-                </span>
-            </div>
-        </>
+        <div className="flex flex-wrap m-0">
+            <HomeSection borders={["borderRight", "borderBottom"]}>LOGO</HomeSection>
+            <HomeSection borders={["borderLeft", "borderBottom"]}>
+                <img className="w-full" src={LF1} alt="LF1" />
+            </HomeSection>
+            <HomeSection borders={["borderRight", "borderTop", "borderBottom"]}>
+                <div className="p-24">
+                    <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
+                        You won't want to miss this
+                    </h2>
+                    <LinhButton>Schedule</LinhButton>
+                </div>
+            </HomeSection>
+            <HomeSection borders={["borderLeft", "borderTop", "borderBottom"]}>
+                <div style={{ width: "100%" }}>
+                    <HomeSection borders={["borderBottom"]} filledRow hideMobileBorder>
+                        <div className="py-12 px-12 w-full">
+                            <CountdownDisplay date={USA.weddingDate} />
+                            <h2 className="text-4xl uppercase m-0 p-0" style={{ fontFamily: "CorbelBold" }}>
+                                Until the big day
+                            </h2>
+                        </div>
+                    </HomeSection>
+                    <HomeSection borders={["borderTop"]} filledRow hideMobileBorder>
+                        <div className="p-12 w-full">
+                            <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
+                                Are you coming?
+                            </h2>
+                            <LinhButton>RSVP</LinhButton>
+                        </div>
+                    </HomeSection>
+                </div>
+            </HomeSection>
+            <HomeSection borders={["borderRight", "borderTop", "borderBottom"]}>
+                <div className="p-24">
+                    <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
+                        Book it!
+                    </h2>
+                    <LinhButton>Accomodations</LinhButton>
+                </div>
+            </HomeSection>
+            <HomeSection borders={["borderLeft", "borderTop", "borderBottom"]}>
+                <div className="p-24">
+                    <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
+                        {USA.location}
+                    </h2>
+                    <LinhButton>Location</LinhButton>
+                </div>
+            </HomeSection>
+        </div>
     );
 };
 

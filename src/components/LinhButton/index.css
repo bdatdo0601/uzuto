@@ -1,0 +1,9 @@
+.linh-button:hover {
+    color: #fff;
+    background-color: rgb(62, 58, 92);
+}
+
+.linh-button:active {
+    color: #aaa;
+    background-color: rgb(62, 58, 92);
+}

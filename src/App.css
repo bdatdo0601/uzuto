@@ -1,4 +1,22 @@
+@import "~antd/dist/antd.css";
+
 @font-face {
-    font-family: "CursiveFont";
-    src: local("CursiveFont"), url(./assets/Precious.ttf) format("truetype");
+    font-family: "CorbelBold";
+    src: local("CorbelBold"), url(./assets/fonts/CorbelBold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "AvenirNextLT";
+    src: local("AvenirNextLT"), url(./assets/fonts/AvenirNextLTPro-Regular.otf) format("opentype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    color: rgb(38, 38, 38);
+    /* rgb(62,98,52) */
 }
