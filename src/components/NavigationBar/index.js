@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Drawer, Icon } from "antd";
+import { Drawer, Icon, Anchor } from "antd";
 import { useWindowSize } from "../../utils/hooks";
 
 const WebNavigationBar = ({ navList, selectedNavItem }) => (
@@ -35,9 +35,11 @@ const MobileNavigationBar = ({ navList, selectedNavItem }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
-            <button className="absolute p-4 left-0 top-0" onClick={() => setIsOpen(!isOpen)}>
-                <Icon type="menu" size="lg" />
-            </button>
+            <div className="fixed p-4 left-0 top-0">
+                <button onClick={() => setIsOpen(!isOpen)}>
+                    <Icon type="menu" style={{ fontSize: 24 }} />
+                </button>
+            </div>
             <Drawer placement="left" closable onClose={() => setIsOpen(false)} visible={isOpen}>
                 <div className="flex flex-col flex-start w-full" style={{ width: "80vw" }}>
                     {navList.map(navItem => (
