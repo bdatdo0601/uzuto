@@ -1,6 +1,6 @@
 {
     "identityPoolName": "uzuto95557ea8_identitypool_95557ea8",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "uzuto95557ea8",
     "userPoolName": "uzuto95557ea8_userpool_95557ea8",
     "autoVerifiedAttributes": [

@@ -28,5 +28,11 @@
 				}
 			}
 		}
+	},
+	"storage": {
+		"uzutostorage": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }

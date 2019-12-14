@@ -1,8 +1,71 @@
-type Guest @model {
+type Guest @model @auth(rules: [{ allow: owner, operations: [delete] }]) {
     id: ID!
     name: String!
+    email: String
+    phoneNumber: String
+    address: String
     description: String
+    isVerified: Boolean
+    isAttending: Boolean
     isRsvp: Boolean
     rsvpTimeStamp: AWSDate
-    response: [String]
+    companies: [String]
+    attendingEvents: [EventAttendee] @connection(keyName: "byGuest", fields: ["id"])
+    restLocation: String
+}
+
+type EventAttendee
+    @model(queries: null)
+    @key(name: "byEvent", fields: ["eventID", "guestID"])
+    @key(name: "byGuest", fields: ["guestID", "eventID"])
+    @auth(rules: [{ allow: owner, operations: [delete] }]) {
+    id: ID!
+    eventID: ID!
+    guestID: ID!
+    event: Event! @connection(fields: ["eventID"])
+    guest: Event! @connection(fields: ["guestID"])
+}
+
+type Event @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
+    id: ID!
+    title: String!
+    description: String
+    venue: String
+    attire: String
+    guests: [EventAttendee] @connection(keyName: "byEvent", fields: ["id"])
+}
+
+type Image
+    @model
+    @key(name: "byDescriptions", fields: ["descriptionID", "imageLink"])
+    @key(name: "byVenue", fields: ["venueID", "imageLink"])
+    @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
+    id: ID!
+    imageLink: String!
+    subtitle: String
+    width: String
+    height: String
+    descriptionID: ID
+    venueID: ID
+}
+
+type Descriptions @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
+    id: ID!
+    title: String
+    context: String
+    content: String
+    signature: String
+    images: [Image] @connection(keyName: "byDescriptions", fields: ["id"])
+    imageLocation: String
+}
+
+type Venue @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
+    id: ID!
+    title: String
+    shortName: String
+    context: String
+    address: String
+    description: String
+    image: Image @connection(name: "byVenue", fields: ["id"])
+    defaultLocation: Boolean
 }
