@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Drawer, Icon, Anchor } from "antd";
+import { Drawer, Icon } from "antd";
 import { useWindowSize } from "../../utils/hooks";
 
 const WebNavigationBar = ({ navList, selectedNavItem }) => (

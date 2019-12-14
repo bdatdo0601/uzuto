@@ -5,7 +5,7 @@ import LinhButton from "../../components/LinhButton";
 import CountdownDisplay from "../../components/CountdownDisplay";
 import WeddingInfoContext from "../../context/weddingInfoContext";
 
-const Home = () => {
+const Home = ({ history }) => {
     const { USA } = useContext(WeddingInfoContext);
     return (
         <div className="flex flex-wrap m-0">
@@ -18,7 +18,7 @@ const Home = () => {
                     <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
                         You won't want to miss this
                     </h2>
-                    <LinhButton>Schedule</LinhButton>
+                    <LinhButton onClick={() => history.push("/party")}>Schedule</LinhButton>
                 </div>
             </HomeSection>
             <HomeSection borders={["borderLeft", "borderTop", "borderBottom"]}>
@@ -36,7 +36,7 @@ const Home = () => {
                             <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
                                 Are you coming?
                             </h2>
-                            <LinhButton>RSVP</LinhButton>
+                            <LinhButton onClick={() => history.push("/rsvp")}>RSVP</LinhButton>
                         </div>
                     </HomeSection>
                 </div>
@@ -46,7 +46,7 @@ const Home = () => {
                     <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
                         Book it!
                     </h2>
-                    <LinhButton>Accomodations</LinhButton>
+                    <LinhButton onClick={() => history.push("/accommodations")}>Accomodations</LinhButton>
                 </div>
             </HomeSection>
             <HomeSection borders={["borderLeft", "borderTop", "borderBottom"]}>
@@ -54,7 +54,7 @@ const Home = () => {
                     <h2 className="text-4xl uppercase" style={{ fontFamily: "CorbelBold" }}>
                         {USA.location}
                     </h2>
-                    <LinhButton>Location</LinhButton>
+                    <LinhButton onClick={() => history.push("/travel")}>Location</LinhButton>
                 </div>
             </HomeSection>
         </div>

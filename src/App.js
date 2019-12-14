@@ -4,7 +4,7 @@ import "./App.css";
 import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import routes from "./routes";
-import ContextProvider from "./context";
+import { ContextProvider } from "./context";
 import MainLayout from "./layout/MainLayout";
 
 Amplify.configure(awsconfig);

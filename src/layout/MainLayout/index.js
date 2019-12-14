@@ -6,8 +6,10 @@ import WeddingInfoContext from "../../context/weddingInfoContext";
 import { getFormattedWeddingDateFromContext } from "../../utils";
 import NavigationBar from "../../components/NavigationBar";
 import PageFooter from "../../components/PageFooter";
+import GlobalContext from "../../context";
 
 const MainLayout = ({ children, routes, location, ...props }) => {
+    const { adminRoutes } = useContext(GlobalContext);
     const { USA, Vietnam } = useContext(WeddingInfoContext);
     const currentLocation = useLocation();
     const displayedRoutes = routes.filter(route => !route.hiddenNav);
@@ -19,10 +21,12 @@ const MainLayout = ({ children, routes, location, ...props }) => {
                     USA.shortLocation
                 } | ${getFormattedWeddingDateFromContext(Vietnam)} ${Vietnam.shortLocation}`}
             />
-            <NavigationBar
-                navList={displayedRoutes}
-                selectedNavItem={routes.find(route => route.path === currentLocation.pathname)}
-            />
+            {!adminRoutes.includes(currentLocation.pathname) && (
+                <NavigationBar
+                    navList={displayedRoutes}
+                    selectedNavItem={routes.find(route => route.path === currentLocation.pathname)}
+                />
+            )}
             {React.cloneElement(children, { ...props })}
             <PageFooter creator="Dat Do" />
         </div>

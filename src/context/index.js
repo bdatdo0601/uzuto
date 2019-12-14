@@ -1,6 +1,16 @@
 import React from "react";
 import { WeddingInfoContextProvider } from "./weddingInfoContext";
 
-const ContextProvider = ({ children }) => <WeddingInfoContextProvider>{children}</WeddingInfoContextProvider>;
+const GlobalContext = React.createContext();
 
-export default ContextProvider;
+export const ContextProvider = ({ children }) => (
+    <GlobalContext.Provider
+        value={{
+            adminRoutes: ["/linh-only"],
+        }}
+    >
+        <WeddingInfoContextProvider>{children}</WeddingInfoContextProvider>
+    </GlobalContext.Provider>
+);
+
+export default GlobalContext;
