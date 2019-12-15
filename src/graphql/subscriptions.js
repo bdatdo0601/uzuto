@@ -93,6 +93,7 @@ export const onCreateEventAttendee = `subscription OnCreateEventAttendee {
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -104,6 +105,7 @@ export const onCreateEventAttendee = `subscription OnCreateEventAttendee {
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -124,6 +126,7 @@ export const onUpdateEventAttendee = `subscription OnUpdateEventAttendee {
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -135,6 +138,7 @@ export const onUpdateEventAttendee = `subscription OnUpdateEventAttendee {
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -155,6 +159,7 @@ export const onDeleteEventAttendee = `subscription OnDeleteEventAttendee($owner:
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -166,6 +171,7 @@ export const onDeleteEventAttendee = `subscription OnDeleteEventAttendee($owner:
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -182,6 +188,7 @@ export const onCreateEvent = `subscription OnCreateEvent($owner: String!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id
@@ -202,6 +209,7 @@ export const onUpdateEvent = `subscription OnUpdateEvent($owner: String!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id
@@ -222,6 +230,7 @@ export const onDeleteEvent = `subscription OnDeleteEvent($owner: String!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id

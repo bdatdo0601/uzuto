@@ -1,4 +1,5 @@
 import React from "react";
+import { Result } from "antd";
 import Admin from "./containers/Admin";
 import Home from "./containers/Home";
 import Invitation from "./containers/Invitation";
@@ -15,5 +16,13 @@ export default [
     { path: "/registry", name: "Registry", component: () => <div>Registry</div>, exact: true },
     { path: "/invitation/:name", name: "Guest Invitation", component: Invitation, hiddenNav: true },
     { path: "/linh-only", name: "Admin Page", component: Admin, hiddenNav: true },
-    { path: "*", name: "Error 404", component: () => <h1>Uh-oh</h1>, exact: true, hiddenNav: true },
+    {
+        path: "*",
+        name: "Error 404",
+        component: () => (
+            <Result status="404" title="Unable to found route" subTitle="Are you sure Linh or Linh's friends?" />
+        ),
+        exact: true,
+        hiddenNav: true,
+    },
 ];

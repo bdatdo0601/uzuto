@@ -21,7 +21,7 @@ const MainLayout = ({ children, routes, location, ...props }) => {
                     USA.shortLocation
                 } | ${getFormattedWeddingDateFromContext(Vietnam)} ${Vietnam.shortLocation}`}
             />
-            {!adminRoutes.includes(currentLocation.pathname) && (
+            {!adminRoutes.some(path => currentLocation.pathname.includes(path)) && (
                 <NavigationBar
                     navList={displayedRoutes}
                     selectedNavItem={routes.find(route => route.path === currentLocation.pathname)}

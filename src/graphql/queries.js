@@ -63,6 +63,7 @@ export const getEvent = `query GetEvent($id: ID!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id
@@ -88,6 +89,7 @@ export const listEvents = `query ListEvents(
       description
       venue
       attire
+      time
       guests {
         nextToken
       }

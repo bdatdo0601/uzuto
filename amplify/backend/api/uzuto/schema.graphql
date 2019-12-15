@@ -32,6 +32,7 @@ type Event @model @auth(rules: [{ allow: owner, operations: [create, update, del
     description: String
     venue: String
     attire: String
+    time: [AWSDate]
     guests: [EventAttendee] @connection(keyName: "byEvent", fields: ["id"])
 }
 

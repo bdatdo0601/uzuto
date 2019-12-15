@@ -93,6 +93,7 @@ export const createEventAttendee = `mutation CreateEventAttendee($input: CreateE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -104,6 +105,7 @@ export const createEventAttendee = `mutation CreateEventAttendee($input: CreateE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -124,6 +126,7 @@ export const updateEventAttendee = `mutation UpdateEventAttendee($input: UpdateE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -135,6 +138,7 @@ export const updateEventAttendee = `mutation UpdateEventAttendee($input: UpdateE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -155,6 +159,7 @@ export const deleteEventAttendee = `mutation DeleteEventAttendee($input: DeleteE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -166,6 +171,7 @@ export const deleteEventAttendee = `mutation DeleteEventAttendee($input: DeleteE
       description
       venue
       attire
+      time
       guests {
         nextToken
       }
@@ -182,6 +188,7 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id
@@ -202,6 +209,7 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id
@@ -222,6 +230,7 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     description
     venue
     attire
+    time
     guests {
       items {
         id

@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { Drawer, Icon } from "antd";
 import { useWindowSize } from "../../utils/hooks";
 
-const WebNavigationBar = ({ navList, selectedNavItem }) => (
+const WebNavigationBar = ({ navList, selectedNavItem, marginLess }) => (
     <div
         className="flex justify-center py-4"
         style={{
-            borderTop: "6px solid rgb(38, 38, 38)",
+            borderTop: marginLess ? "none" : "6px solid rgb(38, 38, 38)",
             borderBottom: "6px solid rgb(38, 38, 38)",
-            marginTop: 24,
+            marginTop: marginLess ? 0 : 24,
             overflow: "scroll",
         }}
     >
@@ -31,8 +31,9 @@ const WebNavigationBar = ({ navList, selectedNavItem }) => (
     </div>
 );
 
-const MobileNavigationBar = ({ navList, selectedNavItem }) => {
+const MobileNavigationBar = ({ navList, selectedNavItem, hideMobile }) => {
     const [isOpen, setIsOpen] = useState(false);
+    if (hideMobile) return null;
     return (
         <>
             <div className="fixed p-4 left-0 top-0">
@@ -78,10 +79,14 @@ NavigationBar.propTypes = {
     selectedNavItem: PropTypes.shape({
         path: PropTypes.string,
     }),
+    hideMobile: PropTypes.bool,
+    marginLess: PropTypes.bool,
 };
 
 NavigationBar.defaultProps = {
     navList: [],
+    hideMobile: false,
+    marginLess: false,
     selectedNavItem: null,
 };
 

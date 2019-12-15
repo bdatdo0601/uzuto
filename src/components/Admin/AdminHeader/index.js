@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Drawer, Icon } from "antd";
 import { useWindowSize } from "../../../utils/hooks";
 
-const WebAdminHeader = ({ currentUser, onClick }) => (
+const WebAdminHeader = ({ currentUser, onClick, navList, selectedNavItem }) => (
     <div
         className="flex justify-between py-4 px-2"
         style={{
@@ -13,7 +14,15 @@ const WebAdminHeader = ({ currentUser, onClick }) => (
             overflow: "scroll",
         }}
     >
-        <span className="leading-loose text-lg">
+        <span
+            className="leading-loose text-lg"
+            style={{
+                fontSize: 14,
+                margin: "4px 24px 4px 24px",
+                fontFamily: "AvenirNextLT",
+                verticalAlign: "middle",
+            }}
+        >
             Hello, <b>{currentUser.attributes.email}</b>
         </span>
         <button
@@ -25,7 +34,7 @@ const WebAdminHeader = ({ currentUser, onClick }) => (
     </div>
 );
 
-const MobileAdminHeader = ({ currentUser, onClick }) => {
+const MobileAdminHeader = ({ currentUser, onClick, navList, selectedNavItem }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
@@ -40,6 +49,21 @@ const MobileAdminHeader = ({ currentUser, onClick }) => {
                     <span className="leading-loose text-lg">
                         <b>{currentUser.attributes.email}</b>
                     </span>
+                    {navList.map(navItem => (
+                        <Link key={navItem.path} to={navItem.path} onClick={() => setIsOpen(false)}>
+                            <h4
+                                style={{
+                                    fontSize: 20,
+                                    margin: "24px 4px 24px 16px",
+                                    fontFamily: "AvenirNextLT",
+                                    fontWeight:
+                                        selectedNavItem && navItem.path === selectedNavItem.path ? "bold" : "normal",
+                                }}
+                            >
+                                {navItem.name.toUpperCase()}
+                            </h4>
+                        </Link>
+                    ))}
                     <button
                         onClick={onClick}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border w-24 border-blue-700 rounded"

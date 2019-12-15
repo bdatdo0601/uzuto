@@ -10,3 +10,19 @@ export const getFormattedWeddingDateFromContext = weddingInfoObj => {
     }
     return "Unknown";
 };
+
+export const normFile = e => {
+    if (Array.isArray(e)) {
+        return e;
+    }
+    return e && e.fileList;
+};
+
+export const getBase64 = file => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+};
