@@ -1,7 +1,7 @@
 type Guest @model @auth(rules: [{ allow: owner, operations: [delete] }]) {
     id: ID!
-    name: String!
-    email: String
+    name: String
+    email: String!
     phoneNumber: String
     address: String
     description: String
