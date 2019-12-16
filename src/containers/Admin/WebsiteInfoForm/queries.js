@@ -27,7 +27,6 @@ export const listDescriptionss = `query ListDescriptionss(
           }
         }
         imageLocation
-        owner
       }
       nextToken
     }

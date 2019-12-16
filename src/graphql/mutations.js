@@ -1,158 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createGuest = `mutation CreateGuest($input: CreateGuestInput!) {
-  createGuest(input: $input) {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const updateGuest = `mutation UpdateGuest($input: UpdateGuestInput!) {
-  updateGuest(input: $input) {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const deleteGuest = `mutation DeleteGuest($input: DeleteGuestInput!) {
-  deleteGuest(input: $input) {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const createEventAttendee = `mutation CreateEventAttendee($input: CreateEventAttendeeInput!) {
-  createEventAttendee(input: $input) {
-    id
-    eventID
-    guestID
-    event {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    guest {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    owner
-  }
-}
-`;
-export const updateEventAttendee = `mutation UpdateEventAttendee($input: UpdateEventAttendeeInput!) {
-  updateEventAttendee(input: $input) {
-    id
-    eventID
-    guestID
-    event {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    guest {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    owner
-  }
-}
-`;
 export const deleteEventAttendee = `mutation DeleteEventAttendee($input: DeleteEventAttendeeInput!) {
   deleteEventAttendee(input: $input) {
     id
     eventID
     guestID
+    owner
     event {
       id
       title
@@ -177,7 +31,6 @@ export const deleteEventAttendee = `mutation DeleteEventAttendee($input: DeleteE
       }
       owner
     }
-    owner
   }
 }
 `;
@@ -302,6 +155,7 @@ export const createDescriptions = `mutation CreateDescriptions($input: CreateDes
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -319,7 +173,6 @@ export const createDescriptions = `mutation CreateDescriptions($input: CreateDes
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -331,6 +184,7 @@ export const updateDescriptions = `mutation UpdateDescriptions($input: UpdateDes
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -348,7 +202,6 @@ export const updateDescriptions = `mutation UpdateDescriptions($input: UpdateDes
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -360,6 +213,7 @@ export const deleteDescriptions = `mutation DeleteDescriptions($input: DeleteDes
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -377,7 +231,6 @@ export const deleteDescriptions = `mutation DeleteDescriptions($input: DeleteDes
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -390,6 +243,7 @@ export const createVenue = `mutation CreateVenue($input: CreateVenueInput!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -404,7 +258,6 @@ export const createVenue = `mutation CreateVenue($input: CreateVenueInput!) {
       venueID
       owner
     }
-    defaultLocation
     owner
   }
 }
@@ -417,6 +270,7 @@ export const updateVenue = `mutation UpdateVenue($input: UpdateVenueInput!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -431,7 +285,6 @@ export const updateVenue = `mutation UpdateVenue($input: UpdateVenueInput!) {
       venueID
       owner
     }
-    defaultLocation
     owner
   }
 }
@@ -444,6 +297,7 @@ export const deleteVenue = `mutation DeleteVenue($input: DeleteVenueInput!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -458,8 +312,154 @@ export const deleteVenue = `mutation DeleteVenue($input: DeleteVenueInput!) {
       venueID
       owner
     }
-    defaultLocation
     owner
+  }
+}
+`;
+export const createGuest = `mutation CreateGuest($input: CreateGuestInput!) {
+  createGuest(input: $input) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const updateGuest = `mutation UpdateGuest($input: UpdateGuestInput!) {
+  updateGuest(input: $input) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const deleteGuest = `mutation DeleteGuest($input: DeleteGuestInput!) {
+  deleteGuest(input: $input) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createEventAttendee = `mutation CreateEventAttendee($input: CreateEventAttendeeInput!) {
+  createEventAttendee(input: $input) {
+    id
+    eventID
+    guestID
+    owner
+    event {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+    guest {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const updateEventAttendee = `mutation UpdateEventAttendee($input: UpdateEventAttendeeInput!) {
+  updateEventAttendee(input: $input) {
+    id
+    eventID
+    guestID
+    owner
+    event {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+    guest {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
   }
 }
 `;

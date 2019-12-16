@@ -1,158 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateGuest = `subscription OnCreateGuest {
-  onCreateGuest {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const onUpdateGuest = `subscription OnUpdateGuest {
-  onUpdateGuest {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const onDeleteGuest = `subscription OnDeleteGuest($owner: String!) {
-  onDeleteGuest(owner: $owner) {
-    id
-    name
-    email
-    phoneNumber
-    address
-    description
-    isVerified
-    isAttending
-    isRsvp
-    rsvpTimeStamp
-    companies
-    attendingEvents {
-      items {
-        id
-        eventID
-        guestID
-        owner
-      }
-      nextToken
-    }
-    restLocation
-    owner
-  }
-}
-`;
-export const onCreateEventAttendee = `subscription OnCreateEventAttendee {
-  onCreateEventAttendee {
-    id
-    eventID
-    guestID
-    event {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    guest {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    owner
-  }
-}
-`;
-export const onUpdateEventAttendee = `subscription OnUpdateEventAttendee {
-  onUpdateEventAttendee {
-    id
-    eventID
-    guestID
-    event {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    guest {
-      id
-      title
-      description
-      venue
-      attire
-      time
-      guests {
-        nextToken
-      }
-      owner
-    }
-    owner
-  }
-}
-`;
 export const onDeleteEventAttendee = `subscription OnDeleteEventAttendee($owner: String!) {
   onDeleteEventAttendee(owner: $owner) {
     id
     eventID
     guestID
+    owner
     event {
       id
       title
@@ -177,7 +31,6 @@ export const onDeleteEventAttendee = `subscription OnDeleteEventAttendee($owner:
       }
       owner
     }
-    owner
   }
 }
 `;
@@ -302,6 +155,7 @@ export const onCreateDescriptions = `subscription OnCreateDescriptions($owner: S
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -319,7 +173,6 @@ export const onCreateDescriptions = `subscription OnCreateDescriptions($owner: S
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -331,6 +184,7 @@ export const onUpdateDescriptions = `subscription OnUpdateDescriptions($owner: S
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -348,7 +202,6 @@ export const onUpdateDescriptions = `subscription OnUpdateDescriptions($owner: S
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -360,6 +213,7 @@ export const onDeleteDescriptions = `subscription OnDeleteDescriptions($owner: S
     context
     content
     signature
+    imageLocation
     images {
       items {
         id
@@ -377,7 +231,6 @@ export const onDeleteDescriptions = `subscription OnDeleteDescriptions($owner: S
       }
       nextToken
     }
-    imageLocation
     owner
   }
 }
@@ -390,6 +243,7 @@ export const onCreateVenue = `subscription OnCreateVenue($owner: String!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -404,7 +258,6 @@ export const onCreateVenue = `subscription OnCreateVenue($owner: String!) {
       venueID
       owner
     }
-    defaultLocation
     owner
   }
 }
@@ -417,6 +270,7 @@ export const onUpdateVenue = `subscription OnUpdateVenue($owner: String!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -431,7 +285,6 @@ export const onUpdateVenue = `subscription OnUpdateVenue($owner: String!) {
       venueID
       owner
     }
-    defaultLocation
     owner
   }
 }
@@ -444,6 +297,7 @@ export const onDeleteVenue = `subscription OnDeleteVenue($owner: String!) {
     context
     address
     description
+    defaultLocation
     image {
       id
       url
@@ -458,8 +312,154 @@ export const onDeleteVenue = `subscription OnDeleteVenue($owner: String!) {
       venueID
       owner
     }
-    defaultLocation
     owner
+  }
+}
+`;
+export const onCreateGuest = `subscription OnCreateGuest($owner: String!) {
+  onCreateGuest(owner: $owner) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onUpdateGuest = `subscription OnUpdateGuest($owner: String!) {
+  onUpdateGuest(owner: $owner) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onDeleteGuest = `subscription OnDeleteGuest($owner: String!) {
+  onDeleteGuest(owner: $owner) {
+    id
+    name
+    email
+    phoneNumber
+    address
+    description
+    isVerified
+    isAttending
+    isRsvp
+    rsvpTimeStamp
+    companies
+    restLocation
+    owner
+    attendingEvents {
+      items {
+        id
+        eventID
+        guestID
+        owner
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateEventAttendee = `subscription OnCreateEventAttendee($owner: String!) {
+  onCreateEventAttendee(owner: $owner) {
+    id
+    eventID
+    guestID
+    owner
+    event {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+    guest {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+  }
+}
+`;
+export const onUpdateEventAttendee = `subscription OnUpdateEventAttendee($owner: String!) {
+  onUpdateEventAttendee(owner: $owner) {
+    id
+    eventID
+    guestID
+    owner
+    event {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
+    guest {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+      owner
+    }
   }
 }
 `;
