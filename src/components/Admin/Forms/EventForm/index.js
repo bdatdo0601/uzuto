@@ -1,17 +1,26 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import debounce from "p-debounce";
 import { Card, Form, Input, notification, DatePicker } from "antd";
+import moment from "moment";
 
 export default function EventForm({ form, id, title, defaultData, onChange, debounceTime, extra, suggestedVenues }) {
     const { getFieldDecorator, getFieldsValue } = form;
     const [isDisabled, setIsDisabled] = useState(false);
+    const isSubcribedRef = useRef(true);
+
     const titleKey = `${id}-EventFormTitle`;
     const descriptionKey = `${id}-EventFormDescription`;
     const venueKey = `${id}-EventFormVenue`;
     const attireKey = `${id}-EventFormAttire`;
     const timeKey = `${id}-EventFormTime`;
 
+    useEffect(
+        () => () => {
+            isSubcribedRef.current = false;
+        },
+        []
+    );
     const onContentChange = useCallback(
         debounce(
             async () => {
@@ -35,7 +44,9 @@ export default function EventForm({ form, id, title, defaultData, onChange, debo
                         description: err.message,
                     });
                 }
-                setIsDisabled(false);
+                if (isSubcribedRef.current) {
+                    setIsDisabled(false);
+                }
             },
             debounceTime,
             { trailing: true, leading: false }
@@ -60,7 +71,7 @@ export default function EventForm({ form, id, title, defaultData, onChange, debo
                 </Form.Item>
                 <Form.Item label={<span className="text-xl">Time</span>}>
                     {getFieldDecorator(timeKey, {
-                        initialValue: defaultData.time,
+                        initialValue: defaultData.time ? defaultData.time.map(item => moment(item)) : [],
                     })(
                         <DatePicker.RangePicker
                             showTime
@@ -94,11 +105,11 @@ EventForm.propTypes = {
     form: PropTypes.object.isRequired,
     title: PropTypes.string,
     defaultData: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        venue: PropTypes.string.isRequired,
-        attire: PropTypes.string.isRequired,
-        time: PropTypes.array.isRequired,
+        title: PropTypes.string,
+        description: PropTypes.string,
+        venue: PropTypes.string,
+        attire: PropTypes.string,
+        time: PropTypes.array,
     }),
     debounceTime: PropTypes.number,
     onChange: PropTypes.func,

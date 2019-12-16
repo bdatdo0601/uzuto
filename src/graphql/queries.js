@@ -102,10 +102,14 @@ export const listEvents = `query ListEvents(
 export const getImage = `query GetImage($id: ID!) {
   getImage(id: $id) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -120,10 +124,14 @@ export const listImages = `query ListImages(
   listImages(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -142,10 +150,14 @@ export const getDescriptions = `query GetDescriptions($id: ID!) {
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -189,10 +201,14 @@ export const getVenue = `query GetVenue($id: ID!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -217,10 +233,14 @@ export const listVenues = `query ListVenues(
       description
       image {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner

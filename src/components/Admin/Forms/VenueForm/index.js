@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import debounce from "p-debounce";
 import { Card, Form, Input, notification, Upload, Icon, Modal, Radio } from "antd";
@@ -6,6 +6,7 @@ import { normFile, getBase64 } from "../../../../utils";
 
 export default function VenueForm({ form, id, title, defaultData, onChange, debounceTime, extra }) {
     const { getFieldDecorator, getFieldsValue, getFieldValue } = form;
+    const isSubcribedRef = useRef(true);
     const [isDisabled, setIsDisabled] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
     const [previewVisible, setPreviewVisible] = useState(false);
@@ -15,8 +16,17 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
     const descriptionKey = `${id}-VenueFormDescription`;
     const imageKey = `${id}-VenueFormImage`;
     const defaultLocationKey = `${id}-VenueFormDefaultLocation`;
+    const [imageList, setImageList] = useState(getFieldValue(imageKey) || []);
 
-    const imageList = getFieldValue(imageKey) || [];
+    useEffect(() => {
+        setImageList(defaultData.image ? [defaultData.image] : []);
+    }, [defaultData.image]);
+    useEffect(
+        () => () => {
+            isSubcribedRef.current = false;
+        },
+        []
+    );
 
     const onContentChange = useCallback(
         debounce(
@@ -33,14 +43,14 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
                     ]);
                     const images = (values[imageKey] || []).map(item => ({
                         ...item,
-                        subTitle: form.getFieldValue(`${id}-${item.uid}`),
+                        subTitle: form.getFieldValue(`${id}-${item.name}`),
                     }));
                     await onChange({
                         title: values[titleKey],
                         shortName: values[shortNameKey],
                         address: values[addressKey],
                         description: values[descriptionKey],
-                        image: images[0],
+                        image: images[0] || null,
                         defaultLocation: values[defaultLocationKey],
                     });
                     notification.success({
@@ -53,7 +63,9 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
                         description: err.message,
                     });
                 }
-                setIsDisabled(false);
+                if (isSubcribedRef.current) {
+                    setIsDisabled(false);
+                }
             },
             debounceTime,
             { trailing: true, leading: false }
@@ -106,7 +118,9 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
                 </Form.Item>
                 <Form.Item label={<span className="text-xl">Images</span>}>
                     {getFieldDecorator(imageKey, {
-                        initialValue: defaultData.image ? [defaultData.image] : [],
+                        initialValue: defaultData.image
+                            ? [{ ...defaultData.image, key: defaultData.image.name, uid: defaultData.image.name }]
+                            : [],
                         valuePropName: "fileList",
                         getValueFromEvent: normFile,
                     })(
@@ -133,7 +147,7 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
                 </Form.Item>
                 {imageList.length >= 1 && (
                     <Form.Item label={<span className="text-xl">Image ({imageList[0].name}) Subtitle</span>}>
-                        {getFieldDecorator(`${id}-${imageList[0].uid}`, {
+                        {getFieldDecorator(`${id}-${imageList[0].name}`, {
                             initialValue: defaultData.image ? defaultData.image.subTitle : "",
                         })(<Input onChange={onContentChange} disabled={isDisabled} />)}
                     </Form.Item>
@@ -147,11 +161,11 @@ VenueForm.propTypes = {
     form: PropTypes.object.isRequired,
     title: PropTypes.string,
     defaultData: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        shortName: PropTypes.string.isRequired,
-        address: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        shortName: PropTypes.string,
+        address: PropTypes.string,
         image: PropTypes.object,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
     }),
     debounceTime: PropTypes.number,
     onChange: PropTypes.func,

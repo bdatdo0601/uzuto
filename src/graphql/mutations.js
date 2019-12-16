@@ -247,10 +247,14 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
 export const createImage = `mutation CreateImage($input: CreateImageInput!) {
   createImage(input: $input) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -260,10 +264,14 @@ export const createImage = `mutation CreateImage($input: CreateImageInput!) {
 export const updateImage = `mutation UpdateImage($input: UpdateImageInput!) {
   updateImage(input: $input) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -273,10 +281,14 @@ export const updateImage = `mutation UpdateImage($input: UpdateImageInput!) {
 export const deleteImage = `mutation DeleteImage($input: DeleteImageInput!) {
   deleteImage(input: $input) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -293,10 +305,14 @@ export const createDescriptions = `mutation CreateDescriptions($input: CreateDes
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -318,10 +334,14 @@ export const updateDescriptions = `mutation UpdateDescriptions($input: UpdateDes
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -343,10 +363,14 @@ export const deleteDescriptions = `mutation DeleteDescriptions($input: DeleteDes
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -368,10 +392,14 @@ export const createVenue = `mutation CreateVenue($input: CreateVenueInput!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -391,10 +419,14 @@ export const updateVenue = `mutation UpdateVenue($input: UpdateVenueInput!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -414,10 +446,14 @@ export const deleteVenue = `mutation DeleteVenue($input: DeleteVenueInput!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner

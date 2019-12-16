@@ -6,6 +6,7 @@
         "antd": "^3.25.3",
         "aws-amplify": "^1.2.4",
         "aws-amplify-react": "^2.5.4",
+        "aws-appsync": "^3.0.2",
         "debounce-promise": "^3.1.2",
         "moment": "^2.24.0",
         "p-debounce": "^2.1.0",

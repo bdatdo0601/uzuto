@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "uzuto95557ea8_identitypool_95557ea8",
+    "identityPoolName": "uzuto95557ea8_identitypool_a4fbd614",
     "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "uzuto95557ea8",
     "userPoolName": "uzuto95557ea8_userpool_95557ea8",
@@ -21,7 +21,7 @@
         "email"
     ],
     "userpoolClientGenerateSecret": true,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
         "email"
     ],
@@ -44,10 +44,23 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "usernameAttributes": [
         "email"
     ],
     "userPoolGroupList": [],
-    "dependsOn": []
+    "dependsOn": [],
+    "userPoolGroups": false,
+    "adminQueries": true,
+    "triggers": "{}",
+    "hostedUI": true,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "thirdPartyAuth": false,
+    "hostedUIDomainName": "uzutofc7d8597-fc7d8597",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}"
 }

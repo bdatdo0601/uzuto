@@ -1,22 +1,31 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import debounce from "p-debounce";
 import { Card, Form, Input, notification, Upload, Icon, Modal, Radio } from "antd";
 import { normFile, getBase64 } from "../../../../utils";
 
-export default function DescriptionsForm({ form, id, title, defaultData, onChange, debounceTime }) {
+export default function DescriptionsForm({ form, id, title, defaultData, onChange, debounceTime, refetch }) {
     const { getFieldDecorator, getFieldsValue, getFieldValue } = form;
-    const [isDisabled, setIsDisabled] = useState(false);
-    const [previewImage, setPreviewImage] = useState(null);
-    const [previewVisible, setPreviewVisible] = useState(false);
+    const isSubcribedRef = useRef(true);
     const titleKey = `${id}-DescriptionsFormTitle`;
     const contentKey = `${id}-DescriptionsFormContent`;
     const signatureKey = `${id}-DescriptionsFormSignature`;
     const imageKey = `${id}-DescriptionsFormImages`;
     const imageLocationKey = `${id}-DescriptionsFormImageLocation`;
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [imageList, setImageList] = useState(getFieldValue(imageKey) || []);
 
-    const imageList = getFieldValue(imageKey) || [];
-
+    useEffect(() => {
+        setImageList(getFieldValue(imageKey) || []);
+    }, [getFieldValue, imageKey, defaultData.images]);
+    useEffect(
+        () => () => {
+            isSubcribedRef.current = false;
+        },
+        []
+    );
     const onContentChange = useCallback(
         debounce(
             async () => {
@@ -25,13 +34,13 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                     const values = getFieldsValue([titleKey, contentKey, signatureKey, imageKey, imageLocationKey]);
                     const images = (values[imageKey] || []).map(item => ({
                         ...item,
-                        subTitle: form.getFieldValue(`${id}-${item.uid}`),
+                        subTitle: form.getFieldValue(`${id}-${item.name}`),
                     }));
                     await onChange({
                         title: values[titleKey],
                         content: values[contentKey],
                         signature: values[signatureKey],
-                        images,
+                        images: images || [],
                         imageLocation: values[imageLocationKey],
                     });
                     notification.success({
@@ -44,7 +53,9 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                         description: err.message,
                     });
                 }
-                setIsDisabled(false);
+                if (isSubcribedRef.current) {
+                    setIsDisabled(false);
+                }
             },
             debounceTime,
             { trailing: true, leading: false }
@@ -83,7 +94,7 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                     {getFieldDecorator(imageLocationKey, {
                         initialValue: defaultData.imageLocation,
                     })(
-                        <Radio.Group onChange={onContentChange}>
+                        <Radio.Group onChange={onContentChange} disabled={isDisabled}>
                             <Radio.Button value="top">Top</Radio.Button>
                             <Radio.Button value="left">Left</Radio.Button>
                             <Radio.Button value="bottom">Bottom</Radio.Button>
@@ -100,6 +111,7 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                             listType="picture-card"
                             beforeUpload={() => false}
                             onChange={onContentChange}
+                            disabled={isDisabled}
                             onPreview={async file => {
                                 if (!file.url && !file.preview) {
                                     file.preview = await getBase64(file.originFileObj);
@@ -117,14 +129,14 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                 </Form.Item>
                 {imageList.map((item, index) => (
                     <Form.Item
-                        key={item.uid}
+                        key={item.name}
                         label={
                             <span className="text-xl">
                                 Image {index + 1} ({item.name}) Subtitle
                             </span>
                         }
                     >
-                        {getFieldDecorator(`${id}-${item.uid}`, {
+                        {getFieldDecorator(`${id}-${item.name}`, {
                             initialValue: defaultData.images.length > index ? defaultData.images[index].subTitle : "",
                         })(<Input onChange={onContentChange} disabled={isDisabled} />)}
                     </Form.Item>
@@ -138,11 +150,11 @@ DescriptionsForm.propTypes = {
     form: PropTypes.object.isRequired,
     title: PropTypes.string,
     defaultData: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        content: PropTypes.string.isRequired,
-        signature: PropTypes.string.isRequired,
-        images: PropTypes.array.isRequired,
-        imageLocation: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        content: PropTypes.string,
+        signature: PropTypes.string,
+        images: PropTypes.array,
+        imageLocation: PropTypes.string,
     }),
     debounceTime: PropTypes.number,
     onChange: PropTypes.func,
@@ -158,5 +170,5 @@ DescriptionsForm.defaultProps = {
         imageLocation: "top",
     },
     onChange: () => {},
-    debounceTime: 1000,
+    debounceTime: 2000,
 };

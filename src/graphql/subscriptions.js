@@ -247,10 +247,14 @@ export const onDeleteEvent = `subscription OnDeleteEvent($owner: String!) {
 export const onCreateImage = `subscription OnCreateImage($owner: String!) {
   onCreateImage(owner: $owner) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -260,10 +264,14 @@ export const onCreateImage = `subscription OnCreateImage($owner: String!) {
 export const onUpdateImage = `subscription OnUpdateImage($owner: String!) {
   onUpdateImage(owner: $owner) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -273,10 +281,14 @@ export const onUpdateImage = `subscription OnUpdateImage($owner: String!) {
 export const onDeleteImage = `subscription OnDeleteImage($owner: String!) {
   onDeleteImage(owner: $owner) {
     id
+    url
     imageLink
-    subtitle
+    subTitle
+    thumbUrl
+    name
     width
     height
+    type
     descriptionID
     venueID
     owner
@@ -293,10 +305,14 @@ export const onCreateDescriptions = `subscription OnCreateDescriptions($owner: S
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -318,10 +334,14 @@ export const onUpdateDescriptions = `subscription OnUpdateDescriptions($owner: S
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -343,10 +363,14 @@ export const onDeleteDescriptions = `subscription OnDeleteDescriptions($owner: S
     images {
       items {
         id
+        url
         imageLink
-        subtitle
+        subTitle
+        thumbUrl
+        name
         width
         height
+        type
         descriptionID
         venueID
         owner
@@ -368,10 +392,14 @@ export const onCreateVenue = `subscription OnCreateVenue($owner: String!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -391,10 +419,14 @@ export const onUpdateVenue = `subscription OnUpdateVenue($owner: String!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner
@@ -414,10 +446,14 @@ export const onDeleteVenue = `subscription OnDeleteVenue($owner: String!) {
     description
     image {
       id
+      url
       imageLink
-      subtitle
+      subTitle
+      thumbUrl
+      name
       width
       height
+      type
       descriptionID
       venueID
       owner

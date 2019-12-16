@@ -12,7 +12,9 @@
         },
         "categories": {
             "auth": {
-                "uzuto95557ea8": {}
+                "uzuto95557ea8": {
+                    "hostedUIProviderCreds": "[]"
+                }
             }
         }
     }
