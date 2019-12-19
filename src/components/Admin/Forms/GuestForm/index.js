@@ -29,7 +29,6 @@ function GuestForm({ visible, form, onClose, onOk }) {
                     description: "Guests will submit more information on their own",
                 });
             } catch (err) {
-                console.error(err);
                 notification.error({
                     message: "Something wrong! blame Dat",
                     description: err.message,

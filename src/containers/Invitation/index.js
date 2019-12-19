@@ -8,7 +8,6 @@ import { listGuests } from "../../graphql/queries";
 
 const Invitation = () => {
     const { name } = useParams();
-    console.log(name);
     return (
         <Connect query={graphqlOperation(listGuests)}>
             {({ data: { listGuests }, loading, errors }) => {

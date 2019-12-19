@@ -1,15 +1,19 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 
-const gqlOp = async (query, variables) => {
-    const data = await API.graphql(graphqlOperation(query, variables));
+const gqlOp = async (query, variables, authMode) => {
+    const data = await API.graphql({
+        query,
+        variables,
+        authMode,
+    });
     return data;
 };
 
-const fetchQuery = async (query, variables, setLoading, setData, setError) => {
+const fetchQuery = async (query, variables, authMode, setLoading, setData, setError) => {
     setLoading(true);
     try {
-        const { data } = await gqlOp(query, variables);
+        const { data } = await gqlOp(query, variables, authMode);
         setData(data);
     } catch (error) {
         console.error(error);
@@ -68,15 +72,15 @@ export const useInterval = (callback, delay) => {
     }, [delay]);
 };
 
-export const useQuery = (query, variables, pollInterval = null) => {
+export const useQuery = (query, variables, pollInterval = null, authMode = "AMAZON_COGNITO_USER_POOLS") => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [data, setData] = useState({});
     const [requestCount, setRequestCount] = useState(0);
 
     useEffect(() => {
-        fetchQuery(query, variables, setLoading, setData, setError);
-    }, [query, variables, requestCount]);
+        fetchQuery(query, variables, authMode, setLoading, setData, setError);
+    }, [query, variables, requestCount, authMode]);
 
     useInterval(() => {
         if (pollInterval) {
@@ -88,11 +92,11 @@ export const useQuery = (query, variables, pollInterval = null) => {
         loading,
         data,
         error,
-        refetch: async () => fetchQuery(query, variables, setLoading, setData, setError),
+        refetch: async () => fetchQuery(query, variables, authMode, setLoading, setData, setError),
     };
 };
 
-export const useMutation = mutation => {
+export const useMutation = (mutation, authMode = "AMAZON_COGNITO_USER_POOLS") => {
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
 
@@ -100,7 +104,7 @@ export const useMutation = mutation => {
         mutation: async variables => {
             setLoading(true);
             try {
-                await gqlOp(mutation, variables);
+                await gqlOp(mutation, variables, authMode);
                 setLoading(false);
             } catch (err) {
                 setErrors([err]);
