@@ -75,7 +75,7 @@ export default function EventForm({ form, id, title, defaultData, onChange, debo
                     })(
                         <DatePicker.RangePicker
                             showTime
-                            format="MM-DD HH:mm a"
+                            format="MM-DD hh:mm a"
                             className="w-1/2"
                             onChange={onContentChange}
                         />
@@ -84,7 +84,14 @@ export default function EventForm({ form, id, title, defaultData, onChange, debo
                 <Form.Item label={<span className="text-xl">Description</span>}>
                     {getFieldDecorator(descriptionKey, {
                         initialValue: defaultData.description,
-                    })(<Input.TextArea onChange={onContentChange} autoSize={{ minRows: 5 }} disabled={isDisabled} />)}
+                    })(
+                        <Input.TextArea
+                            onChange={onContentChange}
+                            autoSize={{ minRows: 5 }}
+                            disabled={isDisabled}
+                            style={{ whiteSpace: "pre-line" }}
+                        />
+                    )}
                 </Form.Item>
                 <Form.Item label={<span className="text-xl">Venue</span>}>
                     {getFieldDecorator(venueKey, {
@@ -127,7 +134,7 @@ EventForm.defaultProps = {
         time: [],
     },
     onChange: () => {},
-    debounceTime: 1000,
+    debounceTime: 5000,
     extra: null,
     suggestedVenues: [],
 };

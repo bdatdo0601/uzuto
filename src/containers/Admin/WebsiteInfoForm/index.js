@@ -144,7 +144,6 @@ const WebsiteInfoForm = ({ ...props }) => {
                     onChange={async data => onChange(data, registryData, registryKey, "Registry")}
                 />
             </>
-            );
         </Form>
     );
 };

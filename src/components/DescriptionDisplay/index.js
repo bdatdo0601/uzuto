@@ -19,7 +19,7 @@ export default function DescriptionDisplay({ description }) {
                 ? imagesDisplay(description.images.items)
                 : null}
             <Row>
-                <Col className="px-8 my-4 description-content" span={description.imageLocation === "left" ? 18 : 24}>
+                <Col className="px-8 my-4 description-content" span={description.imageLocation === "left" ? 16 : 24}>
                     <p style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}>
                         {description.content}
                     </p>
@@ -36,7 +36,7 @@ export default function DescriptionDisplay({ description }) {
                     </p>
                 </Col>
                 {description.imageLocation === "left" ? (
-                    <Col span={6}>{imagesDisplay(description.images.items)}</Col>
+                    <Col span={8}>{imagesDisplay(description.images.items)}</Col>
                 ) : null}
             </Row>
 

@@ -73,7 +73,7 @@ export const useInterval = (callback, delay) => {
 };
 
 export const useQuery = (query, variables, pollInterval = null, authMode = "AMAZON_COGNITO_USER_POOLS") => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [data, setData] = useState({});
     const [requestCount, setRequestCount] = useState(0);
@@ -97,7 +97,7 @@ export const useQuery = (query, variables, pollInterval = null, authMode = "AMAZ
 };
 
 export const useMutation = (mutation, authMode = "AMAZON_COGNITO_USER_POOLS") => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState(null);
 
     return {

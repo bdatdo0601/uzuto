@@ -83,7 +83,14 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                 <Form.Item label={<span className="text-xl">Content</span>}>
                     {getFieldDecorator(contentKey, {
                         initialValue: defaultData.content,
-                    })(<Input.TextArea onChange={onContentChange} autoSize={{ minRows: 5 }} disabled={isDisabled} />)}
+                    })(
+                        <Input.TextArea
+                            onChange={onContentChange}
+                            autoSize={{ minRows: 5 }}
+                            disabled={isDisabled}
+                            style={{ whiteSpace: "pre-line" }}
+                        />
+                    )}
                 </Form.Item>
                 <Form.Item label={<span className="text-xl">Signature</span>}>
                     {getFieldDecorator(signatureKey, {

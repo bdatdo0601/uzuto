@@ -104,7 +104,14 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
                 <Form.Item label={<span className="text-xl">Description</span>}>
                     {getFieldDecorator(descriptionKey, {
                         initialValue: defaultData.description,
-                    })(<Input.TextArea onChange={onContentChange} autoSize={{ minRows: 5 }} disabled={isDisabled} />)}
+                    })(
+                        <Input.TextArea
+                            onChange={onContentChange}
+                            autoSize={{ minRows: 5 }}
+                            disabled={isDisabled}
+                            style={{ whiteSpace: "pre-line" }}
+                        />
+                    )}
                 </Form.Item>
                 <Form.Item label={<span className="text-xl">Is this one of the main locations</span>}>
                     {getFieldDecorator(defaultLocationKey, {
