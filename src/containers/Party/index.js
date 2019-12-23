@@ -8,8 +8,18 @@ import VenueDisplay from "../../components/VenueDisplay";
 import EventDisplay from "../../components/EventDisplay";
 
 export default function Party() {
-    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
-    const { data: listEventsData, loading: listEventsLoading, errors: listEventsErrors } = useQuery(listEvents);
+    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
+        listVenues,
+        null,
+        null,
+        "API_KEY"
+    );
+    const { data: listEventsData, loading: listEventsLoading, errors: listEventsErrors } = useQuery(
+        listEvents,
+        null,
+        null,
+        "API_KEY"
+    );
     if (listVenuesLoading || listEventsLoading) {
         return <Spin spinning />;
     }

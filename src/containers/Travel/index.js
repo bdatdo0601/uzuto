@@ -7,7 +7,12 @@ import CAR_ICON from "../../assets/car.png";
 import LinhButton from "../../components/LinhButton";
 
 export default function Travel() {
-    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
+    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
+        listVenues,
+        null,
+        null,
+        "API_KEY"
+    );
     if (listVenuesLoading) {
         return <Spin spinning />;
     }

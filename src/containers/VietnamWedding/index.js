@@ -5,7 +5,12 @@ import { Spin, Result } from "antd";
 import VenueDisplay from "../../components/VenueDisplay";
 
 export default function VietnamWedding() {
-    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
+    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
+        listVenues,
+        null,
+        null,
+        "API_KEY"
+    );
     if (listVenuesLoading) {
         return <Spin spinning />;
     }

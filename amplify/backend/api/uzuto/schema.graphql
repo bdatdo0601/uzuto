@@ -3,7 +3,7 @@ type Guest
     @auth(
         rules: [
             { allow: public, operations: [read, create, update, delete] }
-            { allow: owner, operations: [read, create, delete, update] }
+            { allow: private, operations: [read, create, delete, update] }
         ]
     ) {
     id: ID!
@@ -23,13 +23,13 @@ type Guest
 }
 
 type EventAttendee
-    @model(queries: null)
+    @model
     @key(name: "byEvent", fields: ["eventID", "guestID"])
     @key(name: "byGuest", fields: ["guestID", "eventID"])
     @auth(
         rules: [
-            { allow: public, operations: [read, create, update] }
-            { allow: owner, operations: [read, create, delete, update] }
+            { allow: public, operations: [read, create, update, delete] }
+            { allow: private, operations: [read, create, delete, update] }
         ]
     ) {
     id: ID!
@@ -42,7 +42,10 @@ type EventAttendee
 type Event
     @model
     @auth(
-        rules: [{ allow: public, operations: [read] }, { allow: owner, operations: [read, create, delete, update] }]
+        rules: [
+            { allow: public, operations: [read, create, update, delete] }
+            { allow: private, operations: [read, create, delete, update] }
+        ]
     ) {
     id: ID!
     title: String!
@@ -58,7 +61,10 @@ type Image
     @key(name: "byDescriptions", fields: ["descriptionID", "imageLink"])
     @key(name: "byVenue", fields: ["venueID", "imageLink"])
     @auth(
-        rules: [{ allow: public, operations: [read] }, { allow: owner, operations: [read, create, delete, update] }]
+        rules: [
+            { allow: public, operations: [read, create, update] }
+            { allow: private, operations: [read, create, delete, update] }
+        ]
     ) {
     id: ID!
     url: String
@@ -76,7 +82,10 @@ type Image
 type Descriptions
     @model
     @auth(
-        rules: [{ allow: public, operations: [read] }, { allow: owner, operations: [read, create, delete, update] }]
+        rules: [
+            { allow: public, operations: [read, create, update] }
+            { allow: private, operations: [read, create, delete, update] }
+        ]
     ) {
     id: ID!
     title: String
@@ -90,7 +99,10 @@ type Descriptions
 type Venue
     @model
     @auth(
-        rules: [{ allow: public, operations: [read] }, { allow: owner, operations: [read, create, delete, update] }]
+        rules: [
+            { allow: public, operations: [read, create, update] }
+            { allow: private, operations: [read, create, delete, update] }
+        ]
     ) {
     id: ID!
     title: String

@@ -16,13 +16,11 @@ export const getGuest = `query GetGuest($id: ID!) {
     rsvpTimeStamp
     companies
     restLocation
-    owner
     attendingEvents {
       items {
         id
         eventID
         guestID
-        owner
       }
       nextToken
     }
@@ -49,7 +47,6 @@ export const listGuests = `query ListGuests(
       rsvpTimeStamp
       companies
       restLocation
-      owner
       attendingEvents {
         nextToken
       }
@@ -74,7 +71,6 @@ export const listEvents = `query ListEvents(
       guests {
         nextToken
       }
-      owner
     }
     nextToken
   }
@@ -93,11 +89,9 @@ export const getEvent = `query GetEvent($id: ID!) {
         id
         eventID
         guestID
-        owner
       }
       nextToken
     }
-    owner
   }
 }
 `;
@@ -119,7 +113,6 @@ export const listImages = `query ListImages(
       type
       descriptionID
       venueID
-      owner
     }
     nextToken
   }
@@ -138,7 +131,6 @@ export const getImage = `query GetImage($id: ID!) {
     type
     descriptionID
     venueID
-    owner
   }
 }
 `;
@@ -163,11 +155,9 @@ export const getDescriptions = `query GetDescriptions($id: ID!) {
         type
         descriptionID
         venueID
-        owner
       }
       nextToken
     }
-    owner
   }
 }
 `;
@@ -187,7 +177,6 @@ export const listDescriptionss = `query ListDescriptionss(
       images {
         nextToken
       }
-      owner
     }
     nextToken
   }
@@ -214,9 +203,7 @@ export const getVenue = `query GetVenue($id: ID!) {
       type
       descriptionID
       venueID
-      owner
     }
-    owner
   }
 }
 `;
@@ -246,9 +233,7 @@ export const listVenues = `query ListVenues(
         type
         descriptionID
         venueID
-        owner
       }
-      owner
     }
     nextToken
   }

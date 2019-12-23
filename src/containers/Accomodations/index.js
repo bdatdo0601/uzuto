@@ -5,7 +5,12 @@ import { Spin, Result, Row } from "antd";
 import MiniVenueDisplay from "../../components/MiniVenueDisplay";
 
 export default function Accomodations() {
-    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
+    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
+        listVenues,
+        null,
+        null,
+        "API_KEY"
+    );
     if (listVenuesLoading) {
         return <Spin spinning />;
     }

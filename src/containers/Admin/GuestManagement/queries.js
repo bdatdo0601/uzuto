@@ -18,7 +18,6 @@ export const listGuests = `query ListGuests(
         rsvpTimeStamp
         companies
         restLocation
-        owner
         attendingEvents {
           nextToken
           items {
