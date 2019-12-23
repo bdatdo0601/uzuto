@@ -9,7 +9,7 @@ export default function ImageDisplay({ parentID, subTitle, item }) {
     }, [item, parentID]);
     return (
         <div className="my-4">
-            {imageLink && <img src={imageLink} alt={item.imageLink} style={{ width: "100%" }} />}
+            {imageLink && <img src={imageLink} alt={item.imageLink} style={{ width: "100%", objectFit: "cover" }} />}
             {subTitle && (
                 <span
                     style={{

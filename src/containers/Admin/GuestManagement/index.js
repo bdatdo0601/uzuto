@@ -4,13 +4,16 @@ import LinhButton from "../../../components/LinhButton";
 import { Table, Spin, Result, Badge, Popconfirm, notification } from "antd";
 import GuestForm from "../../../components/Admin/Forms/GuestForm";
 import { useQuery, useMutation } from "../../../utils/hooks";
-import { listGuests } from "../../../graphql/queries";
-import { createGuest, deleteGuest } from "../../../graphql/mutations";
+import { listGuests } from "./queries";
+import { createGuest, deleteGuest, updateGuest } from "../../../graphql/mutations";
+import { listVenues } from "../../../graphql/queries";
 
 export default function GuestManagement() {
     const [modalVisible, setModalVisible] = useState(false);
     const { data, loading, errors, refetch } = useQuery(listGuests);
+    const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
     const { mutation: createGuestMutation } = useMutation(createGuest);
+    const { mutation: updateGuestMutation } = useMutation(updateGuest);
     const { mutation: deleteGuestMutation } = useMutation(deleteGuest);
 
     const columns = [
@@ -57,11 +60,18 @@ export default function GuestManagement() {
             title: "Event Count",
             dataIndex: "attendingEvents",
             key: "attendingEvents",
+            render: rawData => {
+                return `(${rawData.items.length}) ${rawData.items.map(item => item.event.title).join(", ")}`;
+            },
         },
         {
             title: "Resting Location",
             dataIndex: "restLocation",
             key: "restLocation",
+            render: restLocation => {
+                const knownLocation = listVenuesData.listVenues.items.find(venue => venue.id === restLocation);
+                return knownLocation.title || "SOMEWHERE IN AUSTIN";
+            },
         },
         {
             title: "Action",
@@ -69,36 +79,66 @@ export default function GuestManagement() {
             fixed: "right",
             width: 200,
             render: (text, record) => (
-                <Popconfirm
-                    title="Are you sure?"
-                    onConfirm={async () => {
-                        try {
-                            await deleteGuestMutation({ input: { id: record.id.toString() } });
-                            notification.success({
-                                message: "Guest deleted",
-                                description: "One less person to worry about",
-                            });
-                        } catch (err) {
-                            console.error(err);
-                            notification.error({
-                                message: "Unable to delete this guest! blame Dat",
-                                description: err.message,
-                            });
-                        }
-                        await refetch();
-                    }}
-                >
-                    <button className="text-red-400" style={{ outline: "none" }}>
-                        Remove
-                    </button>
-                </Popconfirm>
+                <>
+                    {!record.isVerified && (
+                        <button
+                            className="text-blue-400"
+                            style={{ outline: "none" }}
+                            onClick={async () => {
+                                try {
+                                    await updateGuestMutation({
+                                        input: {
+                                            id: record.id,
+                                            isVerified: true,
+                                        },
+                                    });
+                                    notification.success({
+                                        message: "Awesome",
+                                        description: `${record.email} is now verified`,
+                                    });
+                                    await refetch();
+                                } catch (err) {
+                                    notification.error({
+                                        message: "Something Wrong",
+                                        description: `Unable to verify ${record.email}`,
+                                    });
+                                }
+                            }}
+                        >
+                            Verify |
+                        </button>
+                    )}
+                    <Popconfirm
+                        title="Are you sure?"
+                        onConfirm={async () => {
+                            try {
+                                await deleteGuestMutation({ input: { id: record.id.toString() } });
+                                notification.success({
+                                    message: "Guest deleted",
+                                    description: "One less person to worry about",
+                                });
+                            } catch (err) {
+                                console.error(err);
+                                notification.error({
+                                    message: "Unable to delete this guest! blame Dat",
+                                    description: err.message,
+                                });
+                            }
+                            await refetch();
+                        }}
+                    >
+                        <button className="text-red-400" style={{ outline: "none" }}>
+                            Remove
+                        </button>
+                    </Popconfirm>
+                </>
             ),
         },
     ];
-    if (loading) {
+    if (loading || listVenuesLoading) {
         return <Spin spinning />;
     }
-    if (!loading && (errors || !data.listGuests || !data.listGuests.items)) {
+    if (errors || !data.listGuests || !data.listGuests.items || listVenuesErrors || !listVenuesData.listVenues) {
         return <Result status="error" title="Something wrong! Blame Dat" subTitle={JSON.stringify(errors)} />;
     }
     return (

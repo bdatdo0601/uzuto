@@ -11,7 +11,7 @@ const Home = ({ history }) => {
         <div className="flex flex-wrap m-0">
             <HomeSection borders={["borderRight", "borderBottom"]}>LOGO</HomeSection>
             <HomeSection borders={["borderLeft", "borderBottom"]}>
-                <img className="w-full" src={LF1} alt="LF1" />
+                <img className="w-full" src={LF1} alt="LF1" style={{ objectFit: "cover" }} />
             </HomeSection>
             <HomeSection borders={["borderRight", "borderTop", "borderBottom"]}>
                 <div className="p-24">

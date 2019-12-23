@@ -44,7 +44,7 @@ export default function VenueDisplay({ venue }) {
                     <img
                         src={image}
                         alt={`${venue.id}`}
-                        style={{ width: "100%", maxHeight: 500, textAlign: "right" }}
+                        style={{ width: "100%", maxHeight: 500, textAlign: "right", objectFit: "cover" }}
                     />
                 </Col>
             ) : null}

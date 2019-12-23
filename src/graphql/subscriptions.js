@@ -326,6 +326,7 @@ export const onCreateGuest = `subscription OnCreateGuest($owner: String!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies
@@ -353,6 +354,7 @@ export const onUpdateGuest = `subscription OnUpdateGuest($owner: String!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies
@@ -380,6 +382,7 @@ export const onDeleteGuest = `subscription OnDeleteGuest($owner: String!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies

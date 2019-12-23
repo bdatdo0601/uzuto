@@ -326,6 +326,7 @@ export const createGuest = `mutation CreateGuest($input: CreateGuestInput!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies
@@ -353,6 +354,7 @@ export const updateGuest = `mutation UpdateGuest($input: UpdateGuestInput!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies
@@ -380,6 +382,7 @@ export const deleteGuest = `mutation DeleteGuest($input: DeleteGuestInput!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies

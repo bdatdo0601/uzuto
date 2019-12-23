@@ -78,7 +78,7 @@ export default function VenueForm({ form, id, title, defaultData, onChange, debo
     return (
         <>
             <Modal visible={previewVisible} footer={null} onCancel={() => setPreviewVisible(false)}>
-                <img alt="example" style={{ width: "100%" }} src={previewImage} />
+                <img alt="example" style={{ width: "100%", objectFit: "cover" }} src={previewImage} />
             </Modal>
             <Card
                 className="w-full text-left"

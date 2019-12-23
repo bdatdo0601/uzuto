@@ -11,6 +11,7 @@ export const getGuest = `query GetGuest($id: ID!) {
     description
     isVerified
     isAttending
+    songName
     isRsvp
     rsvpTimeStamp
     companies
@@ -43,6 +44,7 @@ export const listGuests = `query ListGuests(
       description
       isVerified
       isAttending
+      songName
       isRsvp
       rsvpTimeStamp
       companies

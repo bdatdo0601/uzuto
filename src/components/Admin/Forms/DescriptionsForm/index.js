@@ -68,7 +68,7 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
     return (
         <>
             <Modal visible={previewVisible} footer={null} onCancel={() => setPreviewVisible(false)}>
-                <img alt="example" style={{ width: "100%" }} src={previewImage} />
+                <img alt="example" style={{ width: "100%", objectFit: "cover" }} src={previewImage} />
             </Modal>
             <Card
                 className="w-full text-left"

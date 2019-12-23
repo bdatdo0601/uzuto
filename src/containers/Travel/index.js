@@ -28,8 +28,8 @@ export default function Travel() {
                             padding: 40,
                             borderRadius: "50%",
                             backgroundColor: "black",
-                            width: "70%",
-                            height: "70%",
+                            width: "50%",
+                            height: "50%",
                         }}
                     >
                         <img
@@ -60,8 +60,8 @@ export default function Travel() {
                             padding: 40,
                             borderRadius: "50%",
                             backgroundColor: "black",
-                            width: "70%",
-                            height: "70%",
+                            width: "50%",
+                            height: "50%",
                         }}
                     >
                         <img
