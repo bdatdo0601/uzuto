@@ -343,6 +343,11 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             }
                             return guestFamily.map((item, index) => data[`guestFamily${index}`]);
                         };
+                        if (!name || !email) {
+                            notification.error({
+                                message: "Please provide your name and email",
+                            });
+                        }
                         try {
                             let guestID = "";
                             if (existedGuest) {
@@ -381,21 +386,24 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                                     },
                                 });
                             }
-                            await Promise.all(
-                                data.eventsAttending.map(async event => {
-                                    console.log(event);
-                                    await createEventAttendeeMutation({
-                                        input: {
-                                            id: uuid(),
-                                            eventID: event,
-                                            guestID,
-                                        },
-                                    });
-                                })
-                            );
+                            data.eventsAttending &&
+                                (await Promise.all(
+                                    data.eventsAttending.map(async event => {
+                                        console.log(event);
+                                        await createEventAttendeeMutation({
+                                            input: {
+                                                id: uuid(),
+                                                eventID: event,
+                                                guestID,
+                                            },
+                                        });
+                                    })
+                                ));
                             notification.success({
                                 message: "You have rsvp'ed",
-                                description: "We will be in touch soon",
+                                description: data.isAttending
+                                    ? "We will be in touch soon"
+                                    : "It would be nice to have you here....",
                             });
                             form.resetFields();
                         } catch (err) {

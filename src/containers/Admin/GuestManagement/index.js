@@ -55,6 +55,9 @@ export default function GuestManagement() {
             title: "Company Count",
             dataIndex: "companies",
             key: "companies",
+            render: text => {
+                return `(${text.length}) ${text.join(", ")}`;
+            },
         },
         {
             title: "Event Count",
@@ -70,7 +73,7 @@ export default function GuestManagement() {
             key: "restLocation",
             render: restLocation => {
                 const knownLocation = listVenuesData.listVenues.items.find(venue => venue.id === restLocation);
-                return knownLocation.title || "SOMEWHERE IN AUSTIN";
+                return knownLocation ? knownLocation.title : "SOMEWHERE IN AUSTIN";
             },
         },
         {
