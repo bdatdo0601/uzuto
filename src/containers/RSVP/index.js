@@ -389,7 +389,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             data.eventsAttending &&
                                 (await Promise.all(
                                     data.eventsAttending.map(async event => {
-                                        console.log(event);
                                         await createEventAttendeeMutation({
                                             input: {
                                                 id: uuid(),
@@ -410,7 +409,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             console.error(err);
                             notification.error({
                                 message: "Something wrong",
-                                description: "Please try again",
+                                description: "Please refresh the page and try again",
                             });
                         }
                     }}

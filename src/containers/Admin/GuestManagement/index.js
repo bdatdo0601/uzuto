@@ -56,7 +56,7 @@ export default function GuestManagement() {
             dataIndex: "companies",
             key: "companies",
             render: text => {
-                return `(${text.length}) ${text.join(", ")}`;
+                return text ? `(${text.length}) ${text.join(", ")}` : null;
             },
         },
         {
