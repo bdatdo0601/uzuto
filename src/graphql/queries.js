@@ -55,6 +55,67 @@ export const listGuests = `query ListGuests(
   }
 }
 `;
+export const getEventAttendee = `query GetEventAttendee($id: ID!) {
+  getEventAttendee(id: $id) {
+    id
+    eventID
+    guestID
+    event {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+    }
+    guest {
+      id
+      title
+      description
+      venue
+      attire
+      time
+      guests {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listEventAttendees = `query ListEventAttendees(
+  $filter: ModelEventAttendeeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEventAttendees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      eventID
+      guestID
+      event {
+        id
+        title
+        description
+        venue
+        attire
+        time
+      }
+      guest {
+        id
+        title
+        description
+        venue
+        attire
+        time
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const listEvents = `query ListEvents(
   $filter: ModelEventFilterInput
   $limit: Int
