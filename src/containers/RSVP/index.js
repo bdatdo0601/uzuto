@@ -55,7 +55,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
             <div>
                 <div
                     className="text-xl leading-loose rsvp"
-                    style={{ display: "inline-flex", alignItems: "end", marginTop: 16 }}
+                    style={{ display: "inline-flex", alignItems: "end", marginTop: 16, flexWrap: "wrap" }}
                 >
                     <span>I, </span>
                     <Form.Item>
@@ -83,7 +83,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             <Select
                                 type="text"
                                 className="text-xl uppercase"
-                                style={{ minWidth: 200 }}
                                 dropdownMenuStyle={{ backgroundColor: "#fafafa" }}
                             >
                                 <Select.Option value={1}>AM ATTENDING</Select.Option>
@@ -189,7 +188,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                                 <Select
                                     mode="multiple"
                                     className="text-xl uppercase"
-                                    style={{ minWidth: 130 }}
+                                    style={{ minWidth: 200 }}
                                     placeholder={<span style={{ color: "black" }}>0 Events</span>}
                                     maxTagCount={0}
                                     maxTagPlaceholder={
@@ -279,8 +278,9 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30%",
+                                width: "30vw",
                                 marginBottom: 0,
+                                minWidth: 400,
                             }}
                         />
                     )}
@@ -296,7 +296,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30%",
+                                width: "30vw",
+                                minWidth: 400,
                             }}
                         />
                     )}
@@ -312,7 +313,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30%",
+                                width: "30vw",
+                                minWidth: 400,
                             }}
                         />
                     )}
@@ -328,7 +330,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30%",
+                                width: "30vw",
+                                minWidth: 400,
                             }}
                         />
                     )}

@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Drawer, Icon } from "antd";
 import { useWindowSize } from "../../utils/hooks";
+import "./index.css";
 
 const WebNavigationBar = ({ navList, selectedNavItem, marginLess }) => (
     <div
-        className="flex justify-center py-4"
+        className="flex justify-center py-4 navigation-bar-web"
         style={{
             borderTop: marginLess ? "none" : "6px solid rgb(38, 38, 38)",
             borderBottom: "6px solid rgb(38, 38, 38)",
             marginTop: marginLess ? 0 : 24,
-            overflow: "scroll",
         }}
     >
         {navList.map(navItem => (
@@ -36,7 +36,7 @@ const MobileNavigationBar = ({ navList, selectedNavItem, hideMobile }) => {
     if (hideMobile) return null;
     return (
         <>
-            <div className="fixed p-4 left-0 top-0">
+            <div className="fixed p-4 left-0 top-0 navigation-bar-mobile">
                 <button onClick={() => setIsOpen(!isOpen)}>
                     <Icon type="menu" style={{ fontSize: 24 }} />
                 </button>

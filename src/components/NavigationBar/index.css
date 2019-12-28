@@ -1,0 +1,12 @@
+.navigation-bar-web {
+    overflow: scroll;
+}
+
+.navigation-bar-web::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.navigation-bar-web {
+    -ms-overflow-style: none;
+}

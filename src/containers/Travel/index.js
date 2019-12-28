@@ -26,15 +26,15 @@ export default function Travel() {
                 Travel
             </h1>
             <Row className="my-8" type="flex" justify="space-around" align="middle" style={{ width: "100%" }}>
-                <Col style={{ textAlign: "center" }} span={6}>
+                <Col style={{ textAlign: "center" }} span={6} md={12} sm={24} xs={24}>
                     <div
                         style={{
                             margin: "0 auto",
                             padding: 40,
                             borderRadius: "50%",
                             backgroundColor: "black",
-                            width: "50%",
-                            height: "50%",
+                            width: 200,
+                            height: 200,
                         }}
                     >
                         <img
@@ -57,7 +57,7 @@ export default function Travel() {
                         <LinhButton style={{ marginTop: 24 }}>FIND FLIGHTS</LinhButton>
                     </a>
                 </Col>
-                <Col style={{ textAlign: "center" }} span={6}>
+                <Col style={{ textAlign: "center" }} span={6} md={12} sm={24} xs={24}>
                     <div
                         className="my-4"
                         style={{
@@ -65,8 +65,8 @@ export default function Travel() {
                             padding: 40,
                             borderRadius: "50%",
                             backgroundColor: "black",
-                            width: "50%",
-                            height: "50%",
+                            width: 200,
+                            height: 200,
                         }}
                     >
                         <img

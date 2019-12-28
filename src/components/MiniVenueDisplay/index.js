@@ -47,7 +47,7 @@ export default function MiniVenueDisplay({ venue }) {
             <h3 className="text-base" style={{ fontWeight: "normal" }}>
                 {venue.address}
             </h3>
-            <p className="text-center px-8">{venue.description.slice(0, 500)}...</p>
+            <p className="text-center px-8">{venue.description}</p>
         </Col>
     );
 }
