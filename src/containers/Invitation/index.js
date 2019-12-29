@@ -12,14 +12,16 @@ const Invitation = () => {
     return (
         <div className="w-full text-center">
             <Connect query={graphqlOperation(listGuests)}>
-                {({ data: { listGuests }, loading, errors }) => {
+                {({ data, loading, errors }) => {
                     if (loading) {
                         return <ReactLoading type="balls" color="#ccc" height="20px" width="100px" />;
                     }
-                    if (errors.length > 0 || !listGuests.items) {
+                    if (errors.length > 0 || !data.listGuests.items) {
                         return <div>{errors.toString()}</div>;
                     }
-                    const guest = listGuests.items.find(g => g.name.replace(/\W+/g, "") === name.replace(/\W+/g, ""));
+                    const guest = data.listGuests.items.find(
+                        g => g.name.replace(/\W+/g, "").toLowerCase() === name.replace(/\W+/g, "").toLowerCase()
+                    );
                     if (!guest) {
                         return (
                             <h1
