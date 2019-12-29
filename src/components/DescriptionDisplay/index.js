@@ -18,7 +18,6 @@ const getStyleFromLocation = location => {
 
 export default function DescriptionDisplay({ description }) {
     const descriptions = description.content.split("\n").filter(item => item);
-    console.log(descriptions);
     const imagesDisplay = location => (
         <Row type="flex" justify="center">
             {description.images.items.map(item => (
