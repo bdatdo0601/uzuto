@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Select, Button, Icon, Spin, Result, Tooltip, notification } from "antd";
 import uuid from "uuid";
+import moment from "moment";
 import LinhButton from "../../components/LinhButton";
 import "./index.css";
 import { listEvents, listVenues, listGuests } from "../../graphql/queries";
@@ -47,8 +48,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
     ) {
         return <Result status="error" title="Something wrong! blame Linh's brother" />;
     }
-    const events = listEventsData.listEvents.items;
-    const venues = listVenuesData.listVenues.items.slice(0, listVenuesData.listVenues.items.length - 1);
+    const events = listEventsData.listEvents.items.sort((a, b) => moment(a.time[0]).diff(moment(b.time[0])));
     const guestList = listGuestsData.listGuests.items;
     return (
         <Form className="text-center" style={{ fontFamily: "AvenirNextLT" }}>
@@ -218,33 +218,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                         className="text-xl leading-loose"
                         style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
                     >
-                        <span style={{ marginRight: 4 }}>I'll be hanging my hat at</span>
-                        <Form.Item>
-                            {getFieldDecorator("restLocation", {
-                                initialValue: "",
-                            })(
-                                <Select
-                                    className="text-xl uppercase"
-                                    style={{ minWidth: 250 }}
-                                    dropdownMenuStyle={{ backgroundColor: "#fafafa" }}
-                                >
-                                    {venues.map(venue => (
-                                        <Select.Option key={venue.id} value={venue.id}>
-                                            <Tooltip title={venue.title}>{venue.title}</Tooltip>
-                                        </Select.Option>
-                                    ))}
-                                    <Select.Option value="">SOMEWHERE IN AUSTIN</Select.Option>
-                                </Select>
-                            )}
-                        </Form.Item>
-                    </div>
-                ) : null}
-                <br />
-                {form.getFieldValue("isAttending") ? (
-                    <div
-                        className="text-xl leading-loose"
-                        style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
-                    >
                         <span style={{ marginRight: 4 }}>You'll find me dancing when they play</span>
                         <Form.Item>
                             {getFieldDecorator("songName", {
@@ -278,9 +251,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30vw",
                                 marginBottom: 0,
-                                minWidth: 400,
+                                minWidth: "350px",
                             }}
                         />
                     )}
@@ -296,8 +268,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30vw",
-                                minWidth: 400,
+                                minWidth: "350px",
                             }}
                         />
                     )}
@@ -313,8 +284,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30vw",
-                                minWidth: 400,
+                                minWidth: "350px",
                             }}
                         />
                     )}
@@ -330,8 +300,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                width: "30vw",
-                                minWidth: 400,
+                                minWidth: "350px",
                             }}
                         />
                     )}
@@ -348,7 +317,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             address2,
                             isAttending,
                             isExtraGuests,
-                            restLocation,
                             songName,
                         } = data;
                         const existedGuest = guestList.find(existingGuest => email === existingGuest.email);
@@ -380,7 +348,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                                         isRsvp: true,
                                         rsvpTimeStamp: new Date(),
                                         companies: getExtraGuest(),
-                                        restLocation,
                                         songName,
                                     },
                                 });
@@ -399,7 +366,6 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                                         isRsvp: true,
                                         rsvpTimeStamp: new Date(),
                                         companies: getExtraGuest(),
-                                        restLocation,
                                         songName,
                                     },
                                 });

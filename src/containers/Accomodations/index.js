@@ -21,9 +21,9 @@ export default function Accomodations() {
     return (
         <div>
             <h1 className="text-center text-5xl my-8 uppercase" style={{ fontFamily: "CorbelBold", fontWeight: "500" }}>
-                Accomodations
+                Accommodations
             </h1>
-            <Row className="my-8">
+            <Row className="my-8" type="flex" justify="space-around">
                 {venues.map(item => (
                     <MiniVenueDisplay venue={item} key={item.id} />
                 ))}

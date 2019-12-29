@@ -6,11 +6,11 @@ import ImageDisplay from "../ImageDisplay";
 const getStyleFromLocation = location => {
     switch (location) {
         case "top":
-            return { maxHeight: 600, minHeight: 500, width: "70%" };
+            return { maxHeight: 500, width: 500 };
         case "bottom":
-            return {};
+            return { width: 800 };
         case "left":
-            return { width: "100%" };
+            return { maxHeight: 500 };
         default:
             return {};
     }
@@ -18,9 +18,15 @@ const getStyleFromLocation = location => {
 
 export default function DescriptionDisplay({ description }) {
     const imagesDisplay = location => (
-        <Row type="flex" justify="space-around">
+        <Row type="flex" justify="center">
             {description.images.items.map(item => (
-                <Col md={12} sm={24} xs={24} key={item.imageLink}>
+                <Col
+                    span={description.images.items.length === 1 ? 24 : 6}
+                    md={description.images.items.length === 1 ? 24 : 6}
+                    sm={24}
+                    xs={24}
+                    key={item.imageLink}
+                >
                     <ImageDisplay
                         item={item}
                         parentID={description.id}
@@ -32,11 +38,17 @@ export default function DescriptionDisplay({ description }) {
         </Row>
     );
     return (
-        <div className="text-center py-8">
+        <div className={description.imageLocation === "left" ? "text-center py-8" : "text-center py-8 px-8"}>
             {!description.imageLocation || description.imageLocation === "top"
                 ? imagesDisplay(description.imageLocation)
                 : null}
-            <Row gutter={4} type="flex" justify="space-between" align="middle">
+            <Row
+                gutter={4}
+                type="flex"
+                justify="space-between"
+                align="middle"
+                style={description.imageLocation === "left" ? { borderLeft: "3px solid #c9c9c9" } : {}}
+            >
                 <Col
                     className="px-8 my-4 description-content"
                     lg={description.imageLocation === "left" ? 12 : 24}
@@ -44,7 +56,10 @@ export default function DescriptionDisplay({ description }) {
                     xs={24}
                     sm={24}
                 >
-                    <p style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}>
+                    <p
+                        className={description.imageLocation === "left" ? "text-justify" : ""}
+                        style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}
+                    >
                         {description.content}
                     </p>
                     <p

@@ -21,7 +21,9 @@ export default function VenueDisplay({ venue }) {
                 xs={24}
                 style={{ paddingRight: 16 }}
             >
-                <h3 className="text-xl">{venue.title}</h3>
+                <h3 className="text-xl" style={{ fontWeight: "bold" }}>
+                    {venue.title}
+                </h3>
                 <h1 className="text-lg" style={{ fontWeight: "normal" }}>
                     {venue.address}
                 </h1>
@@ -44,7 +46,7 @@ export default function VenueDisplay({ venue }) {
                     <img
                         src={image}
                         alt={`${venue.id}`}
-                        style={{ width: "100%", maxHeight: 500, textAlign: "right", objectFit: "cover" }}
+                        style={{ width: "100%", maxHeight: 350, textAlign: "right", objectFit: "cover" }}
                     />
                 </Col>
             ) : null}

@@ -1,6 +1,6 @@
 {
-    "short_name": "React App",
-    "name": "Create React App Sample",
+    "short_name": "Fritz.Do",
+    "name": "Andrew Fritz and Linh Do Website",
     "icons": [
         {
             "src": "favicon.ico",
@@ -10,12 +10,7 @@
         {
             "src": "favicon-32x32.png",
             "type": "image/png",
-            "sizes": "192x192"
-        },
-        {
-            "src": "favicon-32x32.png",
-            "type": "image/png",
-            "sizes": "512x512"
+            "sizes": "32x32"
         }
     ],
     "start_url": ".",

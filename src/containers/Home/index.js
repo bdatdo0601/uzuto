@@ -47,9 +47,9 @@ const Home = ({ history }) => {
             <HomeSection borders={["borderRight", "borderTop", "borderBottom"]}>
                 <div className="p-24">
                     <h2 className="text-5xl uppercase" style={{ fontFamily: "CorbelBold" }}>
-                        Book it!
+                        Where to stay
                     </h2>
-                    <LinhButton onClick={() => history.push("/accommodations")}>Accomodations</LinhButton>
+                    <LinhButton onClick={() => history.push("/accommodations")}>Accommodations</LinhButton>
                 </div>
             </HomeSection>
             <HomeSection borders={["borderLeft", "borderTop", "borderBottom"]}>

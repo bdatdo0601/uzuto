@@ -39,7 +39,10 @@ export default function Party() {
                 Venue
             </h1>
             <VenueDisplay venue={mainVenue} />
-            <h1 className="text-center text-5xl my-8 uppercase" style={{ fontFamily: "CorbelBold", fontWeight: "500" }}>
+            <h1
+                className="text-center text-5xl uppercase"
+                style={{ fontFamily: "CorbelBold", fontWeight: "500", marginTop: 42 }}
+            >
                 Schedule
             </h1>
             {sortedDates.map(date => (

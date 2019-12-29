@@ -9,7 +9,7 @@ export default function ImageDisplay({ parentID, subTitle, item, imageStyle }) {
     }, [item, parentID]);
     return (
         <div
-            className="my-4"
+            className="my-4 mx-4"
             style={{ display: "flex", alignContent: "center", flexDirection: "column", alignItems: "center" }}
         >
             {imageLink && (
@@ -18,7 +18,7 @@ export default function ImageDisplay({ parentID, subTitle, item, imageStyle }) {
                     alt={item.imageLink}
                     style={{
                         objectFit: "cover",
-                        marginBottom: 4,
+                        marginBottom: 2,
                         ...imageStyle,
                     }}
                 />

@@ -15,7 +15,9 @@ export default function EventDisplay({ event, span }) {
             sm={24}
         >
             <h3 className="text-2xl">{moment(event.time[0]).format("hh:mm a")}</h3>
-            <h3 className="text-2xl">{event.title}</h3>
+            <h3 className="text-2xl" style={{ fontWeight: "bold" }}>
+                {event.title}
+            </h3>
             {descriptions.map(item => (
                 <p key={item} className="text-base">
                     {item}
