@@ -47,10 +47,10 @@ export default function MiniVenueDisplay({ venue }) {
             >
                 {venue.title}
             </h3>
-            <h3 className="px-16" style={{ fontWeight: "normal", fontSize: 15 }}>
+            <h3 className="px-16" style={{ fontWeight: "normal", fontSize: 15, marginTop: 6 }}>
                 {venue.address}
             </h3>
-            <p className="text-center px-16" style={{ marginTop: 4, fontSize: 17 }}>
+            <p className="text-center px-16" style={{ fontSize: 17, marginTop: 6 }}>
                 {venue.description}
             </p>
         </Col>
