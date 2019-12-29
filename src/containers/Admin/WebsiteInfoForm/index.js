@@ -18,6 +18,7 @@ const queryVariables = { limit: 10000 };
 const welcomeKey = "Welcome";
 const usKey = "Us";
 const registryKey = "Registry";
+const travelKey = "Travel";
 
 const WebsiteInfoForm = ({ ...props }) => {
     const { loading, data, errors } = useQuery(listDescriptionss, queryVariables);
@@ -32,6 +33,7 @@ const WebsiteInfoForm = ({ ...props }) => {
     const welcomeData = data.listDescriptionss.items.find(item => item.id === welcomeKey);
     const usData = data.listDescriptionss.items.find(item => item.id === usKey);
     const registryData = data.listDescriptionss.items.find(item => item.id === registryKey);
+    const travelData = data.listDescriptionss.items.find(item => item.id === travelKey);
     const onChange = async (data, oldData, key, context) => {
         const { title, content, signature, imageLocation, images } = data;
         const input = Object.keys({ title, content, signature, imageLocation }).reduce(
@@ -142,6 +144,25 @@ const WebsiteInfoForm = ({ ...props }) => {
                             : {}
                     }
                     onChange={async data => onChange(data, registryData, registryKey, "Registry")}
+                />
+                <DescriptionsForm
+                    {...props}
+                    title="Travel Page"
+                    id="Travel"
+                    defaultData={
+                        travelData
+                            ? {
+                                  ...travelData,
+                                  images:
+                                      travelData.images.items.map(item => ({
+                                          ...item,
+                                          key: item.name,
+                                          uid: item.name,
+                                      })) || [],
+                              }
+                            : {}
+                    }
+                    onChange={async data => onChange(data, travelData, travelKey, "Travel")}
                 />
             </>
         </Form>

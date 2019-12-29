@@ -55,7 +55,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
             <div>
                 <div
                     className="text-xl leading-loose rsvp"
-                    style={{ display: "inline-flex", alignItems: "end", marginTop: 16, flexWrap: "wrap" }}
+                    style={{ display: "inline-flex", alignItems: "end", marginTop: 48, flexWrap: "wrap" }}
                 >
                     <span>I, </span>
                     <Form.Item>
@@ -306,7 +306,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                     )}
                 </Form.Item>
                 <LinhButton
-                    style={{ marginBottom: 24, width: 300 }}
+                    style={{ marginBottom: 64, width: 300 }}
                     onClick={async () => {
                         const data = form.getFieldsValue();
                         const {

@@ -5,7 +5,7 @@ const TitleHeader = ({ title, subtitle }) => (
         <h1 className="uppercase m-0" style={{ fontFamily: "CorbelBold", fontSize: 64 }}>
             {title}
         </h1>
-        <h3 className="" style={{ fontFamily: "AvenirNextLT", fontSize: 14 }}>
+        <h3 className="" style={{ fontFamily: "AvenirNextLT", fontSize: 16 }}>
             {subtitle}
         </h3>
     </div>

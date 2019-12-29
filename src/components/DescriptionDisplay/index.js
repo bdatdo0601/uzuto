@@ -17,6 +17,8 @@ const getStyleFromLocation = location => {
 };
 
 export default function DescriptionDisplay({ description }) {
+    const descriptions = description.content.split("\n").filter(item => item);
+    console.log(descriptions);
     const imagesDisplay = location => (
         <Row type="flex" justify="center">
             {description.images.items.map(item => (
@@ -56,12 +58,16 @@ export default function DescriptionDisplay({ description }) {
                     xs={24}
                     sm={24}
                 >
-                    <p
-                        className={description.imageLocation === "left" ? "text-justify" : ""}
-                        style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}
-                    >
-                        {description.content}
-                    </p>
+                    {descriptions.map(content => (
+                        <p
+                            key={content}
+                            className={description.imageLocation !== "top" ? "text-left" : ""}
+                            style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}
+                        >
+                            {content}
+                        </p>
+                    ))}
+
                     <p
                         className="text-right"
                         style={{

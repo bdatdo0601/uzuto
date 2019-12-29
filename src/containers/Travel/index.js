@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useQuery } from "../../utils/hooks";
-import { listVenues } from "../../graphql/queries";
+import { listVenues, getDescriptions } from "../../graphql/queries";
 import { Spin, Result, Row, Col, Tooltip } from "antd";
 import AIRPLANE_ICON from "../../assets/airplane.png";
 import CAR_ICON from "../../assets/car.png";
 import LinhButton from "../../components/LinhButton";
+import DescriptionDisplay from "../../components/DescriptionDisplay";
 
 export default function Travel() {
     const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
@@ -13,13 +14,21 @@ export default function Travel() {
         null,
         "API_KEY"
     );
-    if (listVenuesLoading) {
+    const variables = useMemo(() => ({ id: "Travel" }), []);
+    const { data: getDescriptionData, loading: descriptionLoading, errors: descriptionErrors } = useQuery(
+        getDescriptions,
+        variables,
+        null,
+        "API_KEY"
+    );
+    if (listVenuesLoading || descriptionLoading) {
         return <Spin spinning />;
     }
-    if (listVenuesErrors || !listVenuesData.listVenues) {
+    if (listVenuesErrors || !listVenuesData.listVenues || descriptionErrors || !getDescriptionData.getDescriptions) {
         return <Result status="error" title="Something wrong! blame Linh's brother" />;
     }
     const mainVenue = listVenuesData.listVenues.items[0];
+    const travelDescription = getDescriptionData.getDescriptions;
     return (
         <div>
             <h1 className="text-center text-5xl my-8 uppercase" style={{ fontFamily: "CorbelBold", fontWeight: "500" }}>
@@ -30,7 +39,7 @@ export default function Travel() {
                 type="flex"
                 justify="center"
                 align="middle"
-                style={{ width: "100%", paddingBottom: 64 }}
+                style={{ width: "100%", paddingBottom: 16 }}
             >
                 <Col style={{ textAlign: "center" }} span={4} md={8} sm={24} xs={24}>
                     <div
@@ -114,6 +123,7 @@ export default function Travel() {
                     </Tooltip>
                 </Col>
             </Row>
+            <DescriptionDisplay description={travelDescription} />
         </div>
     );
 }
