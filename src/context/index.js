@@ -6,7 +6,7 @@ const GlobalContext = React.createContext();
 export const ContextProvider = ({ children }) => (
     <GlobalContext.Provider
         value={{
-            adminRoutes: ["/linh-only"],
+            adminRoutes: ["/linh-only", "/invitation"],
         }}
     >
         <WeddingInfoContextProvider>{children}</WeddingInfoContextProvider>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import moment from "moment";
 import uuid from "uuid";
+import XLSX from "xlsx";
 import LinhButton from "../../../components/LinhButton";
 import { Table, Spin, Result, Badge, Popconfirm, notification } from "antd";
 import GuestForm from "../../../components/Admin/Forms/GuestForm";
@@ -7,6 +9,14 @@ import { useQuery, useMutation } from "../../../utils/hooks";
 import { listGuests } from "./queries";
 import { createGuest, deleteGuest, updateGuest } from "../../../graphql/mutations";
 import { listVenues } from "../../../graphql/queries";
+
+const getStatus = item => {
+    if (!item.isVerified) return "Unverified";
+    if (item.isRsvp) {
+        return item.isAttending ? "Attending" : "Bailed";
+    }
+    return "Waiting for RSVP";
+};
 
 export default function GuestManagement() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -68,6 +78,11 @@ export default function GuestManagement() {
             },
         },
         {
+            title: "Recommended Song(s)",
+            dataIndex: "songName",
+            key: "songName",
+        },
+        {
             title: "Resting Location",
             dataIndex: "restLocation",
             key: "restLocation",
@@ -86,7 +101,7 @@ export default function GuestManagement() {
                     {!record.isVerified && (
                         <button
                             className="text-blue-400"
-                            style={{ outline: "none" }}
+                            style={{ outline: "none", marginRight: 4 }}
                             onClick={async () => {
                                 try {
                                     await updateGuestMutation({
@@ -171,6 +186,35 @@ export default function GuestManagement() {
             <div className="text-center">
                 <h1 className="text-4xl my-8">Guest Management</h1>
                 <div className="flex-auto justify-end space-between my-8 w-full align-right text-right px-8">
+                    <LinhButton
+                        onClick={() => {
+                            const exportData = data.listGuests.items.map(item => ({
+                                Name: item.name,
+                                Email: item.email,
+                                "Phone Number": item.phoneNumber,
+                                Address: item.address,
+                                "Recomended Songs": item.songName,
+                                Status: getStatus(item),
+                                Companies: item.companies.join(", "),
+                                "Company Count": item.companies.length,
+                                "Event Attending": item.attendingEvents.items.map(item => item.event.title).join(", "),
+                                "Event Attending Count": item.attendingEvents.items.length,
+                            }));
+                            const workbook = {
+                                SheetNames: ["Guests"],
+                                Sheets: {
+                                    Guests: XLSX.utils.json_to_sheet(exportData),
+                                },
+                            };
+                            workbook.SheetNames = XLSX.writeFile(
+                                workbook,
+                                `${moment().format("MMDDYYYY")}_LinhWeddingGuest.xlsx`
+                            );
+                        }}
+                        style={{ marginRight: 32 }}
+                    >
+                        Export to Spreadsheet
+                    </LinhButton>
                     <LinhButton onClick={() => setModalVisible(true)}>Add New Guest</LinhButton>
                 </div>
                 <Table
