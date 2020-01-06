@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import { useQuery } from "../../utils/hooks";
+import { useQuery, useWindowSize } from "../../utils/hooks";
 import { listVenues, getDescriptions } from "../../graphql/queries";
-import { Spin, Result, Row, Col, Tooltip } from "antd";
+import { Spin, Result, Row, Col } from "antd";
 import AIRPLANE_ICON from "../../assets/airplane.png";
 import CAR_ICON from "../../assets/car.png";
 import LinhButton from "../../components/LinhButton";
@@ -21,6 +21,7 @@ export default function Travel() {
         null,
         "API_KEY"
     );
+    const { width } = useWindowSize();
     if (listVenuesLoading || descriptionLoading) {
         return <Spin spinning />;
     }
@@ -61,26 +62,16 @@ export default function Travel() {
                             }}
                         />
                     </div>
-                    <Tooltip
-                        placement="bottom"
-                        title={
-                            <span className="italic" style={{ fontFamily: "AvenirNextLT" }}>
-                                Link to Google flight
-                            </span>
+                    <a
+                        href={
+                            "https://www.google.com/flights#flt=/m/01cx_.AUS.2020-05-15*AUS./m/01cx_.2020-05-19;c:USD;e:1;sd:1;t:f"
                         }
-                        arrowPointAtCenter
+                        style={{ outline: "none", color: "black", paddingBottom: 32 }}
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
-                        <a
-                            href={
-                                "https://www.google.com/flights#flt=/m/01cx_.AUS.2020-05-15*AUS./m/01cx_.2020-05-19;c:USD;e:1;sd:1;t:f"
-                            }
-                            style={{ outline: "none", color: "black", paddingBottom: 32 }}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                            <LinhButton style={{ marginTop: 24 }}>FIND FLIGHTS</LinhButton>
-                        </a>
-                    </Tooltip>
+                        <LinhButton style={{ marginTop: 24 }}>FIND FLIGHTS</LinhButton>
+                    </a>
                 </Col>
                 <Col style={{ textAlign: "center" }} span={4} md={8} sm={24} xs={24}>
                     <div
@@ -103,27 +94,26 @@ export default function Travel() {
                             }}
                         />
                     </div>
-                    <Tooltip
-                        placement="bottom"
-                        title={
-                            <span className="italic" style={{ fontFamily: "AvenirNextLT" }}>
-                                Link to Google map
-                            </span>
-                        }
-                        arrowPointAtCenter
+                    <a
+                        href={`http://google.com/maps?q=${mainVenue.address}`}
+                        style={{ outline: "none", color: "black", paddingBottom: 32 }}
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
-                        <a
-                            href={`http://google.com/maps?q=${mainVenue.address}`}
-                            style={{ outline: "none", color: "black", paddingBottom: 32 }}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                            <LinhButton style={{ marginTop: 24 }}>FIND DIRECTIONS</LinhButton>
-                        </a>
-                    </Tooltip>
+                        <LinhButton style={{ marginTop: 24 }}>FIND DIRECTIONS</LinhButton>
+                    </a>
                 </Col>
             </Row>
-            <DescriptionDisplay description={travelDescription} />
+            <DescriptionDisplay
+                description={travelDescription}
+                boxStyle={{
+                    width: "100%",
+                    textAlign: "center",
+                    paddingLeft: width > 765 ? 200 : 0,
+                    paddingRight: width > 765 ? 200 : 0,
+                    marginTop: -32,
+                }}
+            />
         </div>
     );
 }

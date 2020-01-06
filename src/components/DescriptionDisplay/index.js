@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
+import parse from "html-react-parser";
 import ImageDisplay from "../ImageDisplay";
+import "./index.css";
 
-const getStyleFromLocation = location => {
+const getStyleFromLocation = (location, imageStyle = null) => {
+    if (imageStyle) return imageStyle;
     switch (location) {
         case "top":
-            return { maxHeight: 500, width: 500 };
+            return { maxHeight: 500, width: 800 };
         case "bottom":
             return { width: 800 };
         case "left":
@@ -16,8 +19,10 @@ const getStyleFromLocation = location => {
     }
 };
 
-export default function DescriptionDisplay({ description }) {
-    const descriptions = description.content.split("\n").filter(item => item);
+export default function DescriptionDisplay({ description, boxStyle, imageStyle }) {
+    const descriptions = description.content
+        .split("\n")
+        .map((item, index) => ({ key: `${item}-${index}`, content: item }));
     const imagesDisplay = location => (
         <Row type="flex" justify="center">
             {description.images.items.map(item => (
@@ -32,7 +37,7 @@ export default function DescriptionDisplay({ description }) {
                         item={item}
                         parentID={description.id}
                         subTitle={item.subTitle}
-                        imageStyle={getStyleFromLocation(location)}
+                        imageStyle={getStyleFromLocation(location, imageStyle)}
                     />
                 </Col>
             ))}
@@ -56,14 +61,18 @@ export default function DescriptionDisplay({ description }) {
                     md={24}
                     xs={24}
                     sm={24}
+                    style={{ fontSize: 16, ...boxStyle }}
                 >
                     {descriptions.map(content => (
                         <p
-                            key={content}
-                            className={description.imageLocation !== "top" ? "text-left" : ""}
-                            style={{ fontSize: 16, margin: "4px 24px 4px 24px", fontFamily: "AvenirNextLT" }}
+                            key={content.key}
+                            style={{
+                                margin: "4px 24px 4px 24px",
+                                fontFamily: "AvenirNextLT",
+                                textAlign: description.imageLocation !== "top" ? "left" : "",
+                            }}
                         >
-                            {content}
+                            {content.content ? parse(content.content) : content.content}
                         </p>
                     ))}
 
@@ -76,7 +85,7 @@ export default function DescriptionDisplay({ description }) {
                             paddingRight: 24,
                         }}
                     >
-                        {description.signature}
+                        {description.signature ? parse(description.signature) : description.signature}
                     </p>
                 </Col>
                 <Col xl={12} lg={12} md={24} xs={24} sm={24}>

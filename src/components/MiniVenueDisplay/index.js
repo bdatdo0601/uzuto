@@ -25,6 +25,7 @@ export default function MiniVenueDisplay({ venue }) {
                 fontFamily: "AvenirNextLT",
                 paddingLeft: 8,
                 paddingRight: 8,
+                maxWidth: 600,
             }}
         >
             {image && (
