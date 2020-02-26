@@ -8,10 +8,12 @@ import { listEvents, listVenues, listGuests } from "../../graphql/queries";
 import { useQuery, useMutation } from "../../utils/hooks";
 import { createGuest, updateGuest } from "../../graphql/mutations";
 import { createEventAttendee } from "./queries";
+import { useWindowSize } from "../../utils/hooks";
 
 const RSVP = Form.create({ name: "form" })(({ form }) => {
     const { getFieldDecorator } = form;
     const [guestFamily, setGuestFamily] = useState([]);
+    const { width } = useWindowSize();
     const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(
         listVenues,
         null,
@@ -51,7 +53,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
     const events = listEventsData.listEvents.items.sort((a, b) => moment(a.time[0]).diff(moment(b.time[0])));
     const guestList = listGuestsData.listGuests.items;
     return (
-        <Form className="text-center" style={{ fontFamily: "AvenirNextLT" }}>
+        <Form className={width >765 ? "text-center" : "text-left"} style={{ fontFamily: "AvenirNextLT" }}>
             <div>
                 <div
                     className="text-xl leading-loose rsvp"
@@ -98,7 +100,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                         className="text-xl leading-loose rsvp"
                         style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
                     >
-                        <span className="mx-4">I will bring</span>
+                        <span className={width >765 ? "mx-4" : ""} style={{ marginRight: 4 }}>I will bring</span>
                         <Form.Item>
                             {getFieldDecorator("isExtraGuests", {
                                 initialValue: 0,
@@ -218,14 +220,14 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                         className="text-xl leading-loose"
                         style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
                     >
-                        <span style={{ marginRight: 4 }}>You'll find me dancing when they play</span>
+                        <span className={width > 765 ? "mx-4" : ""} style={{ marginRight: 8 }}>You'll find me dancing when they play</span>
                         <Form.Item>
                             {getFieldDecorator("songName", {
                                 initialValue: "",
                             })(
                                 <input
                                     type="text"
-                                    className="text-xl mx-2 py-0"
+                                    className="text-xl py-0"
                                     placeholder={"SONG NAME"}
                                     style={{
                                         outline: "None",
@@ -333,6 +335,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             notification.error({
                                 message: "Please provide your name and email",
                             });
+                            return;
                         }
                         try {
                             let guestID = "";

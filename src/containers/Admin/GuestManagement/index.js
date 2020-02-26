@@ -18,9 +18,11 @@ const getStatus = item => {
     return "Waiting for RSVP";
 };
 
+const listGuestsVariables = { limit: 10000  }
+
 export default function GuestManagement() {
     const [modalVisible, setModalVisible] = useState(false);
-    const { data, loading, errors, refetch } = useQuery(listGuests);
+    const { data, loading, errors, refetch } = useQuery(listGuests, listGuestsVariables);
     const { data: listVenuesData, loading: listVenuesLoading, errors: listVenuesErrors } = useQuery(listVenues);
     const { mutation: createGuestMutation } = useMutation(createGuest);
     const { mutation: updateGuestMutation } = useMutation(updateGuest);
@@ -159,6 +161,10 @@ export default function GuestManagement() {
     if (errors || !data.listGuests || !data.listGuests.items || listVenuesErrors || !listVenuesData.listVenues) {
         return <Result status="error" title="Something wrong! Blame Dat" subTitle={JSON.stringify(errors)} />;
     }
+
+    const guestCount = data.listGuests.items.reduce((acc, currentGuest) => {
+        return acc + 1 + currentGuest.companies.length;
+    }, 0)
     return (
         <>
             <GuestForm
@@ -216,11 +222,12 @@ export default function GuestManagement() {
                         Export to Spreadsheet
                     </LinhButton>
                     <LinhButton onClick={() => setModalVisible(true)}>Add New Guest</LinhButton>
+                    <h2 className="text-2xl text-right my-8">Guest Count: {guestCount}</h2>
                 </div>
                 <Table
                     dataSource={data.listGuests.items}
                     columns={columns}
-                    scroll={{ x: 2000, y: 300 }}
+                    scroll={{ x: 2000 }}
                     rowKey={item => item.id}
                 />
             </div>
