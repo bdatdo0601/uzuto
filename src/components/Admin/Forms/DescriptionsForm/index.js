@@ -2,7 +2,8 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import debounce from "p-debounce";
 import { Card, Form, Input, notification, Upload, Icon, Modal, Radio } from "antd";
-import { normFile, getBase64 } from "../../../../utils";
+import { Storage } from "aws-amplify";
+import { normFile } from "../../../../utils";
 
 export default function DescriptionsForm({ form, id, title, defaultData, onChange, debounceTime, refetch }) {
     const { getFieldDecorator, getFieldsValue, getFieldValue } = form;
@@ -121,10 +122,8 @@ export default function DescriptionsForm({ form, id, title, defaultData, onChang
                             onChange={onContentChange}
                             disabled={isDisabled}
                             onPreview={async file => {
-                                if (!file.url && !file.preview) {
-                                    file.preview = await getBase64(file.originFileObj);
-                                }
-                                setPreviewImage(file.url || file.preview);
+                                const image = await Storage.get(`${file.descriptionID}/${file.id}`);
+                                setPreviewImage(image);
                                 setPreviewVisible(true);
                             }}
                         >

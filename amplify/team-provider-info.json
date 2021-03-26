@@ -15,5 +15,23 @@
         "uzuto95557ea8": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uzuto-prod-181432-authRole",
+      "UnauthRoleArn": "arn:aws:iam::142037127835:role/amplify-uzuto-prod-181432-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::142037127835:role/amplify-uzuto-prod-181432-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-uzuto-prod-181432-deployment",
+      "UnauthRoleName": "amplify-uzuto-prod-181432-unauthRole",
+      "StackName": "amplify-uzuto-prod-181432",
+      "StackId": "arn:aws:cloudformation:us-east-1:142037127835:stack/amplify-uzuto-prod-181432/a52a4120-8e80-11eb-b9f7-0e7fefd377cd",
+      "AmplifyAppId": "dnxmtk0fsq02z"
+    },
+    "categories": {
+      "auth": {
+        "uzuto95557ea8": {}
+      }
+    }
   }
 }

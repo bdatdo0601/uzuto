@@ -18,7 +18,7 @@ const getStatus = item => {
     return "Waiting for RSVP";
 };
 
-const listGuestsVariables = { limit: 10000  }
+const listGuestsVariables = { limit: 10000 };
 
 export default function GuestManagement() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -163,8 +163,8 @@ export default function GuestManagement() {
     }
 
     const guestCount = data.listGuests.items.reduce((acc, currentGuest) => {
-        return acc + 1 + currentGuest.companies.length;
-    }, 0)
+        return acc + 1 + (currentGuest.companies ? currentGuest.companies.length : 0);
+    }, 0);
     return (
         <>
             <GuestForm
