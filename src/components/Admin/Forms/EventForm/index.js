@@ -21,6 +21,7 @@ export default function EventForm({ form, id, title, defaultData, onChange, debo
         },
         []
     );
+    // eslint-disable-next-line
     const onContentChange = useCallback(
         debounce(
             async () => {

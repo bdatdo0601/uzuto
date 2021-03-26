@@ -53,7 +53,7 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
     const events = listEventsData.listEvents.items.sort((a, b) => moment(a.time[0]).diff(moment(b.time[0])));
     const guestList = listGuestsData.listGuests.items;
     return (
-        <Form className={width >765 ? "text-center" : "text-left"} style={{ fontFamily: "AvenirNextLT" }}>
+        <Form className={width > 765 ? "text-center" : "text-left"} style={{ fontFamily: "AvenirNextLT" }}>
             <div>
                 <div
                     className="text-xl leading-loose rsvp"
@@ -100,7 +100,9 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                         className="text-xl leading-loose rsvp"
                         style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
                     >
-                        <span className={width >765 ? "mx-4" : ""} style={{ marginRight: 4 }}>I will bring</span>
+                        <span className={width > 765 ? "mx-4" : ""} style={{ marginRight: 4 }}>
+                            I will bring
+                        </span>
                         <Form.Item>
                             {getFieldDecorator("isExtraGuests", {
                                 initialValue: 0,
@@ -220,7 +222,9 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                         className="text-xl leading-loose"
                         style={{ display: "inline-flex", alignItems: "end", flexWrap: "wrap" }}
                     >
-                        <span className={width > 765 ? "mx-4" : ""} style={{ marginRight: 8 }}>You'll find me dancing when they play</span>
+                        <span className={width > 765 ? "mx-4" : ""} style={{ marginRight: 8 }}>
+                            You'll find me dancing when they play
+                        </span>
                         <Form.Item>
                             {getFieldDecorator("songName", {
                                 initialValue: "",
@@ -254,7 +258,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                                 outline: "None",
                                 borderBottom: "1px solid black",
                                 marginBottom: 0,
-                                minWidth: "350px",
+                                width: "80%",
+                                maxWidth: "350px",
                             }}
                         />
                     )}
@@ -270,7 +275,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                minWidth: "350px",
+                                width: "80%",
+                                maxWidth: "350px",
                             }}
                         />
                     )}
@@ -286,7 +292,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                minWidth: "350px",
+                                width: "80%",
+                                maxWidth: "350px",
                             }}
                         />
                     )}
@@ -302,7 +309,8 @@ const RSVP = Form.create({ name: "form" })(({ form }) => {
                             style={{
                                 outline: "None",
                                 borderBottom: "1px solid black",
-                                minWidth: "350px",
+                                width: "80%",
+                                maxWidth: "350px",
                             }}
                         />
                     )}

@@ -7,13 +7,13 @@ export const WeddingInfoContextProvider = ({ children }) => (
         value={{
             Vietnam: {
                 weddingDate: "",
-                altWeddingDate: "Early 2021",
+                altWeddingDate: "Early 2022",
                 shortLocation: "Vietnam",
                 location: "",
             },
             USA: {
-                weddingDate: "2020-05-16T00:00:00-05:00",
-                altWeddingDate: "May 2020",
+                weddingDate: "2021-09-06T00:00:00-05:00",
+                altWeddingDate: "September 2021",
                 shortLocation: "Texas",
                 location: "New Braunfels, TX",
             },
