@@ -9,7 +9,7 @@
         "aws-appsync": "^3.0.2",
         "debounce-promise": "^3.1.2",
         "html-react-parser": "^0.10.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "p-debounce": "^2.1.0",
         "p-throttle": "^3.1.0",
         "promise-throttle": "^1.0.1",
